@@ -1,122 +1,254 @@
-<!DOCTYPE html>
+<!--
+File: christmas-card-vercel.html
+How to use:
+1) Create a new GitHub repo (public or private).
+2) Add this file as index.html at the repo root.
+   - git init; git add index.html; git commit -m "Add Christmas card"; git branch -M main; git remote add origin <YOUR_REPO_URL>; git push -u origin main
+3) Deploy to Vercel:
+   - Go to vercel.com > New Project > Import from GitHub > select the repo > Framework Preset: "Other" > Build Command: (leave empty) > Output Directory: (leave empty)
+   - Click Deploy. Vercel will serve this static index.html.
+
+What's inside:
+- A fully self-contained, single-file festive Christmas card
+- Animated falling snow, twinkling lights, union-jack-inspired bunting
+- Playable synthesized jingle (no external assets)
+- A "Send to a mate" shareable link generator (copies site URL to clipboard)
+
+Enjoy and tweak the copy to match your friend! ❤️🎄
+-->
+
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Christmas Card</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Merry Christmas — A Card for British Mates</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to bottom, #ffefba, #ffffff);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      overflow: hidden;
+    /* Reset */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body,#app{height:100%}
+    body{
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#08121e 0%, #0b2433 60%, #0f1b28 100%);
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow:hidden;
     }
 
-    .card {
-      text-align: center;
-      background-color: #fff;
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-      max-width: 400px;
-      position: relative;
-      z-index: 1;
+    /* Scene */
+    .scene{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;padding:3rem}
+    .card{
+      width:960px;max-width:95%;background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border-radius:20px;padding:2.25rem;box-shadow:0 10px 40px rgba(2,8,23,0.7);backdrop-filter: blur(6px);position:relative;overflow:hidden;
+      transform:translateY(0);transition:transform .6s cubic-bezier(.2,.9,.3,1);
+    }
+    .card:hover{transform:translateY(-6px)}
+
+    /* Header bunting (union-jack-inspired) */
+    .bunting{position:absolute;left:0;right:0;top:-22px;height:140px;pointer-events:none}
+    .bunt-flag{position:absolute;top:6px;width:120px;height:64px;border-radius:6px;transform:rotate(-6deg);box-shadow:0 6px 18px rgba(0,0,0,0.4)}
+    .bunt-flag:nth-child(1){left:10%;background:linear-gradient(135deg,#cf142b 0%, #00247d 100%)}
+    .bunt-flag:nth-child(2){left:24%;background:linear-gradient(135deg,#00247d 0%, #cf142b 100%)}
+    .bunt-flag:nth-child(3){left:40%;background:linear-gradient(135deg,#cf142b 0%, #00247d 100%)}
+    .bunt-flag:nth-child(4){left:56%;background:linear-gradient(135deg,#00247d 0%, #cf142b 100%)}
+    .bunt-flag:nth-child(5){left:72%;background:linear-gradient(135deg,#cf142b 0%, #00247d 100%)}
+
+    /* Snow */
+    .snow{position:absolute;inset:0;pointer-events:none}
+    .flake{position:absolute;top:-10px;width:12px;height:12px;background:rgba(255,255,255,0.9);border-radius:50%;filter:blur(.3px);opacity:.9;animation:fall linear infinite;}
+    @keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0.6}}
+
+    /* Greeting section */
+    .greet{display:flex;gap:2rem;align-items:center}
+    .left{flex:1}
+    .title{font-size:clamp(28px,5vw,46px);line-height:1.02;font-weight:700;letter-spacing:0.6px}
+    .subtitle{margin-top:.6rem;color:rgba(255,255,255,0.8);font-weight:500}
+
+    /* Snow-globe card */
+    .globe{width:320px;height:320px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:inset 0 6px 40px rgba(255,255,255,0.03),0 8px 30px rgba(2,8,23,0.6)}
+    .globe .scene-sm{width:86%;height:86%;border-radius:50%;position:relative;overflow:hidden;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.02), rgba(0,0,0,0.25));}
+    .tree{position:absolute;bottom:28px;left:42%;transform:translateX(-50%);width:0;height:0;border-left:48px solid transparent;border-right:48px solid transparent;border-bottom:80px solid #0b7b1b}
+    .tree:before{content:'';position:absolute;left:-38px;top:18px;width:0;height:0;border-left:38px solid transparent;border-right:38px solid transparent;border-bottom:64px solid #0c8b1f}
+    .tree:after{content:'';position:absolute;left:-28px;top:36px;width:0;height:0;border-left:28px solid transparent;border-right:28px solid transparent;border-bottom:50px solid #0daa23}
+    .trunk{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);width:22px;height:28px;background:#6b452a;border-radius:3px}
+    .star{position:absolute;top:18px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-bottom:18px solid #ffd22a}
+    .ornament{position:absolute;border-radius:50%;box-shadow:0 3px 8px rgba(0,0,0,0.5)}
+    .ornament.o1{width:14px;height:14px;left:38%;top:46%;background:#d81b60}
+    .ornament.o2{width:12px;height:12px;left:52%;top:54%;background:#ffb74d}
+    .ornament.o3{width:16px;height:16px;left:48%;top:40%;background:#4fc3f7}
+
+    /* Buttons */
+    .btns{margin-top:1.25rem;display:flex;gap:.75rem}
+    .btn{padding:.6rem .9rem;border-radius:10px;border:0;background:linear-gradient(90deg,#ffd54f,#ff7043);color:#111;font-weight:700;cursor:pointer;box-shadow:0 8px 20px rgba(255,112,67,0.12);transition:transform .18s ease}
+    .btn:active{transform:translateY(2px)}
+    .btn.secondary{background:linear-gradient(90deg,#90caf9,#64b5f6);color:#042a44}
+
+    /* twinkling lights */
+    .lights{position:absolute;top:18px;left:18px;display:flex;gap:10px}
+    .bulb{width:12px;height:12px;border-radius:50%;box-shadow:0 6px 20px rgba(0,0,0,0.3);animation:twinkle 2s infinite}
+    .bulb.b1{background:#ff1744;animation-delay:0s}
+    .bulb.b2{background:#00e676;animation-delay:.25s}
+    .bulb.b3{background:#2979ff;animation-delay:.45s}
+    .bulb.b4{background:#ffd600;animation-delay:.6s}
+    @keyframes twinkle{0%,100%{opacity:.18;transform:scale(.86)}50%{opacity:1;transform:scale(1.05)}}
+
+    /* footer */
+    .footer{margin-top:1.25rem;color:rgba(255,255,255,0.6);font-size:14px}
+
+    /* small screens */
+    @media (max-width:760px){
+      .greet{flex-direction:column;align-items:center}
+      .left{text-align:center}
+      .globe{width:260px;height:260px}
     }
 
-    h1 {
-      color: #c62828;
-    }
+    /* subtle star field */
+    .stars{position:absolute;inset:0;pointer-events:none}
+    .stars:after{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);background-size:60px 60px;opacity:.9}
 
-    p {
-      color: #333;
-    }
-
-    img {
-      width: 200px;
-      margin: 1rem 0;
-      border-radius: 10px;
-    }
-
-    button {
-      padding: 10px 20px;
-      background-color: #2e7d32;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #1b5e20;
-    }
-
-    .hidden {
-      display: none;
-      margin-top: 1rem;
-      color: #1565c0;
-      font-weight: bold;
-    }
-
-    /* Snow animation */
-    .snowflake {
-      position: fixed;
-      top: -10px;
-      z-index: 0;
-      user-select: none;
-      pointer-events: none;
-      color: #fff;
-      font-size: 1em;
-      animation-name: fall;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-    }
-
-    @keyframes fall {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-    }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Merry Christmas!</h1>
-    <p>Dear friends in the UK,</p>
-    <p>Wishing you joy, love, and plenty of festive cheer this Christmas! 🎄🎁</p>
-    <img src="https://media.giphy.com/media/3o7abld9d1ZJdR2lEA/giphy.gif" alt="Christmas GIF">
-    <button id="surpriseBtn">Click for a surprise!</button>
-    <div id="surprise" class="hidden">
-      <p>🎅 Ho Ho Ho! Have a magical holiday season! ❄️</p>
+  <div id="app" class="scene">
+
+    <div class="bunting" aria-hidden>
+      <div class="bunt-flag"></div>
+      <div class="bunt-flag"></div>
+      <div class="bunt-flag"></div>
+      <div class="bunt-flag"></div>
+      <div class="bunt-flag"></div>
     </div>
+
+    <div class="card" role="main" aria-label="Christmas card">
+      <div class="lights" aria-hidden>
+        <div class="bulb b1"></div>
+        <div class="bulb b2"></div>
+        <div class="bulb b3"></div>
+        <div class="bulb b4"></div>
+      </div>
+
+      <div class="greet">
+        <div class="left">
+          <div class="title">Merry Christmas, mate!</div>
+          <div class="subtitle">Warm mulled wishes from across the pond — may your mince pies be sweet and your lights stay twinkling.</div>
+
+          <div class="btns">
+            <button class="btn" id="playJ">Play the jingle</button>
+            <button class="btn secondary" id="share">Send to a mate</button>
+          </div>
+
+          <div class="footer" id="copied">Tip: deploy this file to GitHub + Vercel to share the live link.</div>
+        </div>
+
+        <div class="globe" role="img" aria-label="Animated snow globe with tree">
+          <div class="scene-sm">
+            <div class="star"></div>
+            <div class="tree"></div>
+            <div class="trunk"></div>
+            <div class="ornament o1"></div>
+            <div class="ornament o2"></div>
+            <div class="ornament o3"></div>
+
+            <!-- tiny drifting snow inside globe -->
+            <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
+              <g id="snowInside"></g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="snow" id="snowLayer" aria-hidden></div>
+    <div class="stars" aria-hidden></div>
   </div>
 
   <script>
-    // Surprise button
-    const button = document.getElementById("surpriseBtn");
-    const surprise = document.getElementById("surprise");
-    button.addEventListener("click", () => {
-      surprise.classList.toggle("hidden");
-    });
-
-    // Snow effect
-    function createSnowflake() {
-      const snowflake = document.createElement('div');
-      snowflake.classList.add('snowflake');
-      snowflake.style.left = Math.random() * window.innerWidth + 'px';
-      snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
-      snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
-      snowflake.textContent = '❄';
-      document.body.appendChild(snowflake);
-
-      setTimeout(() => {
-        snowflake.remove();
-      }, 10000);
+    // Create falling snow flakes
+    const snowLayer = document.getElementById('snowLayer');
+    const W = window.innerWidth; const H = window.innerHeight;
+    const flakes = 30;
+    for(let i=0;i<flakes;i++){
+      const f = document.createElement('div');
+      f.className='flake';
+      const size = 6 + Math.random()*16;
+      f.style.width = size+'px'; f.style.height = size+'px';
+      f.style.left = Math.random()*100 + '%';
+      f.style.opacity = 0.5 + Math.random()*0.9;
+      const dur = 10 + Math.random()*18;
+      f.style.animationDuration = dur+'s';
+      f.style.animationDelay = (-Math.random()*20)+'s';
+      f.style.transform = 'translateY(-10vh)';
+      snowLayer.appendChild(f);
     }
 
-    setInterval(createSnowflake, 200);
+    // snow inside globe SVG
+    const g = document.getElementById('snowInside');
+    for(let i=0;i<12;i++){
+      const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      c.setAttribute('cx',20+Math.random()*60);
+      c.setAttribute('cy',10+Math.random()*60);
+      c.setAttribute('r',1+Math.random()*2.5);
+      c.style.fill = 'white'; c.style.opacity = 0.9;
+      g.appendChild(c);
+      animateCircle(c);
+    }
+    function animateCircle(c){
+      const dy = 8 + Math.random()*26;
+      const dur = 2 + Math.random()*5;
+      let start = null;
+      function step(t){
+        if(!start) start=t;
+        const p = ((t-start)/1000)/dur;
+        c.setAttribute('cy', parseFloat(c.getAttribute('cy')) + p*dy);
+        if(p < 1) requestAnimationFrame(step);
+        else { c.setAttribute('cy', 12+Math.random()*56); setTimeout(()=>animateCircle(c), 400 + Math.random()*800); }
+      }
+    }
+
+    // Simple WebAudio jingle (little arpeggio)
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let ctx, masterGain;
+    function initAudio(){
+      ctx = new AudioContext();
+      masterGain = ctx.createGain(); masterGain.gain.value = 0.12; masterGain.connect(ctx.destination);
+    }
+    const notes = [523.25,659.25,783.99,1046.5]; // C5, E5, G5, C6
+    function playJingle(){
+      if(!ctx) initAudio();
+      const now = ctx.currentTime;
+      notes.forEach((n,i)=>{
+        const osc = ctx.createOscillator();
+        const env = ctx.createGain();
+        osc.type = 'sine'; osc.frequency.value = n;
+        env.gain.value = 0; env.gain.setValueAtTime(0, now + i*0.22);
+        env.gain.linearRampToValueAtTime(1, now + i*0.22 + 0.02);
+        env.gain.exponentialRampToValueAtTime(0.001, now + i*0.22 + 0.9);
+        osc.connect(env); env.connect(masterGain);
+        osc.start(now + i*0.22); osc.stop(now + i*0.22 + 1.0);
+      });
+    }
+
+    document.getElementById('playJ').addEventListener('click', ()=>{
+      playJingle();
+    });
+
+    // Share button: copies current hosted URL (if on Vercel it'll be the live URL)
+    document.getElementById('share').addEventListener('click', async ()=>{
+      let url = location.href;
+      try{
+        await navigator.clipboard.writeText(url);
+        const msg = document.getElementById('copied');
+        msg.textContent = 'Link copied — paste it to your mate! 🎁';
+        setTimeout(()=>{ msg.textContent = 'Tip: deploy this file to GitHub + Vercel to share the live link.'; }, 3000);
+      }catch(e){
+        alert('Copy failed — just share the page link manually: ' + url);
+      }
+    });
+
+    // small accessibility hint
+    document.querySelectorAll('.btn').forEach(b=>b.addEventListener('keydown',e=>{ if(e.key==='Enter') b.click(); }));
+
   </script>
 </body>
 </html>
