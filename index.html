@@ -6,171 +6,211 @@
   <title>Christmas Card</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, sans-serif;
-      background: linear-gradient(to bottom, #b71c1c, #880e4f);
-      height: 100vh;
       margin: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: white;
+      height: 100vh;
     }
 
-    /* Postcard container (before opening) */
-    .postcard {
-      background: #fff;
-      width: 450px;
-      height: 300px;
-      border-radius: 12px;
-      box-shadow: 0 6px 30px rgba(0,0,0,0.4);
-      cursor: pointer;
-      position: relative;
-      text-align: center;
+    /* Intro (Starry Night) */
+    #intro {
+      background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba') no-repeat center/cover;
+      position: absolute;
+      width: 100%;
+      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 1.3rem;
-      transition: transform 0.6s ease;
-      transform-style: preserve-3d;
-    }
-
-    .postcard:hover {
-      transform: scale(1.03);
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    /* Christmas card frame */
-    .card {
-      position: relative;
-      background: #fefefe;
-      padding: 2rem;
-      width: 480px;
-      border: 10px solid #c62828;
-      border-radius: 16px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-      z-index: 1;
-      text-align: center;
-      animation: fadeIn 1s ease forwards;
-      opacity: 0;
-    }
-
-    /* Bow */
-    .bow {
-      position: absolute;
-      top: -30px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-    }
-
-    /* Letter button */
-    button {
-      margin-top: 1rem;
-      padding: 10px 20px;
-      background-color: #2e7d32;
-      color: white;
-      border: none;
-      border-radius: 5px;
       cursor: pointer;
-      font-weight: 600;
+      z-index: 10;
+    }
+
+    .sealed-letter {
+      width: 250px;
+      height: 150px;
+      background: #fffbe6;
+      border: 3px solid #593a15;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #5d4037;
+      position: relative;
+    }
+    .sealed-letter::after {
+      content: "📮";
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      font-size: 2rem;
+    }
+
+    /* Main Card */
+    #main-card {
+      display: none;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #fefefe;
+      border: 10px solid #b71c1c;
+      box-shadow: 0 0 40px rgba(0,0,0,0.4);
+      text-align: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      margin-top: 20px;
+      color: #c62828;
+      font-size: 3rem;
+    }
+
+    img {
+      width: 300px;
+      border-radius: 10px;
+    }
+
+    button {
+      margin: 1rem 0.5rem;
+      padding: 10px 20px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #2e7d32;
+      color: white;
       transition: background 0.3s;
     }
 
-    button:hover {
-      background-color: #1b5e20;
-    }
+    button:hover { background: #1b5e20; }
 
-    /* Christmas letter */
-    .letter {
-      margin-top: 1rem;
-      padding: 1rem;
-      background: #fff3e0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      color: #333;
-      font-size: 1rem;
+    /* Letter Content */
+    #letter {
       display: none;
+      margin: 1rem auto;
+      background: #fff3e0;
+      width: 60%;
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      color: #333;
     }
 
-    /* Snow effect */
+    /* Mini Game */
+    #game {
+      display: none;
+      margin-top: 1rem;
+    }
+
+    #gameBox {
+      width: 200px;
+      height: 200px;
+      background: #ffa726;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      margin: auto;
+      font-weight: bold;
+    }
+
+    /* Snow Effect */
     .snowflake {
       position: fixed;
       top: -10px;
-      color: white;
-      font-size: 1.2rem;
       user-select: none;
       pointer-events: none;
-      animation-name: fall;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
+      color: white;
+      font-size: 1.2rem;
+      animation: fall linear infinite;
       z-index: 0;
     }
 
     @keyframes fall {
-      to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- POSTCARD (closed state) -->
-  <div id="postcard" class="postcard">
-    🎄 Click to Open Your Christmas Card 🎁
+  <!-- INTRO -->
+  <div id="intro">
+    <div class="sealed-letter">Click to Open</div>
   </div>
 
-  <!-- CARD (after opening) -->
-  <div id="card" class="card hidden">
-    <img src="https://i.imgur.com/4K5FSkP.png" alt="Bow" class="bow">
+  <!-- MAIN CARD -->
+  <div id="main-card">
+    <h1>Merry Christmas</h1>
 
-    <h1 style="color:#c62828;">Merry Christmas!</h1>
-    <p style="color:#333;">
-      To my lovely friends in the UK 🇬🇧,<br>
-      May your Christmas be filled with warmth, laughter, and lots of mince pies! 🥧✨
-    </p>
+    <img src="WILL1.jpg" alt="WILL1">
 
-    <img src="https://media.giphy.com/media/3o7abld9d1ZJdR2lEA/giphy.gif" alt="Christmas GIF" 
-         style="width:200px; border-radius:10px; margin:1rem 0;">
+    <br>
+    <button onclick="openGame()">🎮 Play Mini Game</button>
+    <button onclick="openLetter()">💌 Open Letter</button>
 
-    <button id="letterBtn">🎅 Open Your Letter</button>
+    <div id="game">
+      <p>Click the orange box 3 times to win!</p>
+      <div id="gameBox" onclick="countClicks()">Click me</div>
+      <p id="gameStatus"></p>
+    </div>
 
-    <div id="letter" class="letter">
-      <p>Wishing you a wonderful festive season surrounded by people you love.<br>
-      May the new year bring new memories, happiness, and endless tea breaks ☕ <br><br>
-      Lots of love,<br><b>Your Irish friend 💚🎄</b></p>
+    <div id="letter">
+      <p>Dear friend,<br><br>
+      Wishing you the warmest and happiest Christmas filled with laughter and peace 🎄✨<br>
+      Thank you for being amazing this year. May the next year bring you even more joy.<br><br>
+      With love,<br>
+      Your Irish friend 🎁</p>
     </div>
   </div>
 
   <script>
-    // Open the card
-    document.getElementById("postcard").addEventListener("click", () => {
-      document.getElementById("postcard").classList.add("hidden");
-      const card = document.getElementById("card");
-      card.classList.remove("hidden");
-      card.style.opacity = "1";
+    // Intro → Main
+    document.getElementById("intro").addEventListener("click", () => {
+      document.getElementById("intro").style.display = "none";
+      document.getElementById("main-card").style.display = "block";
     });
 
-    // Open letter
-    document.getElementById("letterBtn").addEventListener("click", () => {
+    // Open Letter
+    function openLetter() {
       document.getElementById("letter").style.display = "block";
-    });
+      document.getElementById("game").style.display = "none";
+    }
 
-    // Snow effect
+    // Open Mini Game
+    function openGame() {
+      document.getElementById("game").style.display = "block";
+      document.getElementById("letter").style.display = "none";
+    }
+
+    // Simple game
+    let clickCount = 0;
+    function countClicks() {
+      clickCount++;
+      if (clickCount >= 3) {
+        document.getElementById("gameStatus").textContent = "🎉 You win! Merry Christmas!";
+      } else {
+        document.getElementById("gameStatus").textContent = `Clicks: ${clickCount}/3`;
+      }
+    }
+
+    // Snowfall
     function createSnowflake() {
       const snowflake = document.createElement('div');
+      snowflake.textContent = Math.random() > 0.5 ? '❄' : '✦';
       snowflake.classList.add('snowflake');
       snowflake.style.left = Math.random() * window.innerWidth + 'px';
       snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
       snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
-      snowflake.textContent = Math.random() > 0.5 ? '❄' : '✦';
       document.body.appendChild(snowflake);
       setTimeout(() => snowflake.remove(), 10000);
     }
