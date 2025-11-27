@@ -29,9 +29,8 @@
       display:flex; flex-direction:column; align-items:center; justify-content:center;
       position: relative;
       box-shadow: 0 0 20px rgba(255,255,255,0.7);
-      pointer-events: none; /* Ngăn con chặn event */
+      pointer-events: none;
     }
-
     .letter * { pointer-events: none; }
 
     .seal {
@@ -47,6 +46,8 @@
       background: radial-gradient(circle at top, #14332B, #0B1A16);
       height: 100vh;
       display:flex; justify-content:center; align-items:center;
+      position: relative;
+      overflow: hidden;
     }
 
     .frame {
@@ -60,6 +61,7 @@
       color:white;
       border-radius: 10px;
       box-shadow:0 0 30px rgba(0,0,0,0.6);
+      z-index: 2;
     }
 
     .frame h1 {
@@ -121,11 +123,31 @@
       line-height: 1.5;
       box-shadow: 0 0 15px rgba(0,0,0,0.3);
       animation: letterOpen 0.4s ease forwards;
+      z-index: 5;
+      position:relative;
     }
 
     @keyframes letterOpen {
       from {opacity: 0; transform: scale(0.9);}
       to {opacity: 1; transform: scale(1);}
+    }
+
+    /* SNOWFALL */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: fall linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0.4;
+      }
     }
   </style>
 </head>
@@ -181,6 +203,25 @@
     function openLetter() {
       letterBox.style.display = "block";
     }
+
+    // ❄️ Snowfall Generator
+    function createSnowflake() {
+      const snowflake = document.createElement("div");
+      snowflake.classList.add("snowflake");
+
+      const size = Math.random() * 5 + 2 + "px";
+      snowflake.style.width = size;
+      snowflake.style.height = size;
+
+      snowflake.style.left = Math.random() * window.innerWidth + "px";
+      snowflake.style.animationDuration = Math.random() * 4 + 3 + "s";
+
+      document.body.appendChild(snowflake);
+
+      setTimeout(() => snowflake.remove(), 7000);
+    }
+
+    setInterval(createSnowflake, 200);
   </script>
 </body>
 </html>
