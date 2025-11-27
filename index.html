@@ -1,234 +1,177 @@
+<!-- =========================
+🎅 index.html
+========================= -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Christmas Card</title>
+  <meta charset="UTF-8" />
+  <title>Merry Christmas</title>
+
+  <!-- CSS nhúng -->
   <style>
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(to bottom, #530000, #004d00);
-  }
+    /* =========================
+    🎨 styles.css
+    ========================== */
 
-  /* Intro (Starry Night) */
-  #intro {
-    background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba') no-repeat center/cover;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    z-index: 10;
-  }
+    body {
+      margin: 0;
+      font-family: "Georgia", serif;
+    }
 
-  .sealed-letter {
-    width: 250px;
-    height: 150px;
-    background: #fffbe6;
-    border: 3px solid #593a15;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #5d4037;
-    position: relative;
-  }
-  .sealed-letter::after {
-    content: "📮";
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    font-size: 2rem;
-  }
+    /* INTRO – nền sao */
+    #intro {
+      background: url("background-stars.jpg") center/cover no-repeat;
+      height: 100vh;
+      display:flex; justify-content:center; align-items:center;
+    }
 
-  /* MAIN CARD */
-  #main-card {
-    display: none;
-    position: absolute;
-    width: 90%;
-    height: 90%;
-    background: linear-gradient(145deg, rgba(126,0,0,0.85), rgba(0,60,0,0.85));
-    border: 10px solid #b71c1c;
-    box-shadow: 0 0 40px rgba(0,0,0,0.4);
-    text-align: center;
-    padding: 2rem;
-    backdrop-filter: blur(4px);
-    border-radius: 12px;
-    color: white;
-  }
+    .letter {
+      width: 280px;
+      height: 180px;
+      background: #fcf0e4;
+      border-radius: 10px;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      position: relative;
+      box-shadow: 0 0 20px rgba(255,255,255,0.7);
+      cursor:pointer;
+      text-align:center;
+    }
 
-  h1 {
-    margin-top: 20px;
-    color: #ff4444;
-    font-size: 3.2rem;
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
-  }
+    .seal {
+      position:absolute;
+      bottom:10px;
+      background:#b41f2a;
+      color:white;
+      padding:10px;
+      border-radius:50%;
+      font-size:24px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
 
-  img {
-    width: 320px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    margin-top: 0.5rem;
-  }
+    /* MAIN */
+    #main {
+      background: radial-gradient(circle at top, #14332B, #0B1A16);
+      height: 100vh;
+      display:flex; justify-content:center; align-items:center;
+    }
 
-  button {
-    margin: 1.2rem 0.5rem;
-    padding: 12px 24px;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    background: #007e33;
-    color: white;
-    transition: all 0.3s;
-    font-size: 1rem;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.4);
-  }
+    .frame {
+      width: 80%;
+      max-width: 800px;
+      background: #800d13;
+      border: 25px solid transparent;
+      border-image: url("candy-border.png") 30 round;
+      padding: 40px;
+      text-align: center;
+      color: #fffdf6;
+      position: relative;
+      box-shadow: 0 0 30px rgba(0,0,0,0.6);
+    }
 
-  button:hover { 
-    background: #004d1a; 
-    transform: scale(1.05);
-  }
+    .frame h1 {
+      font-size: 3rem;
+      margin-top: 60px;
+      text-shadow: 3px 3px #390000;
+      letter-spacing: 3px;
+    }
 
-  /* Letter Content */
-  #letter {
-    display: none;
-    margin: 1.2rem auto;
-    background: rgba(255,243,224,0.85);
-    width: 65%;
-    padding: 1.2rem;
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.4);
-    font-size: 1rem;
-    color: #333;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
-  }
+    .photo {
+      width: 60%;
+      border-radius: 10px;
+      margin: 20px auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
 
-  /* Mini Game */
-  #game {
-    display: none;
-    margin-top: 1rem;
-  }
+    .btn-group {
+      margin-top: 20px;
+    }
 
-  #gameBox {
-    width: 220px;
-    height: 220px;
-    background: #ffa726;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    margin: auto;
-    font-weight: bold;
-    font-size: 1.1rem;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-  }
+    .btn-group button {
+      background: #d4af37;
+      color: #6b0000;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      margin: 0 10px;
+      border-radius: 8px;
+      cursor:pointer;
+      font-weight:bold;
+      transition: 0.2s;
+    }
 
-  /* Snow Effect */
-  .snowflake {
-    position: fixed;
-    top: -10px;
-    user-select: none;
-    pointer-events: none;
-    color: white;
-    font-size: 1.2rem;
-    animation: fall linear infinite;
-    z-index: 0;
-  }
+    .btn-group button:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
 
-  @keyframes fall {
-    to { transform: translateY(100vh); opacity: 0; }
-  }
-</style>
+    .bow {
+      width: 120px;
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
 
+    .trees {
+      width: 200px;
+      position: absolute;
+      bottom: -70px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.9;
+    }
+
+    .hidden { display: none; }
+  </style>
 </head>
+
 <body>
-
-  <!-- INTRO -->
+  <!-- =========================
+  📩 INTRO GIAO DIỆN
+  ========================== -->
   <div id="intro">
-    <div class="sealed-letter">Click to Open</div>
-  </div>
-
-  <!-- MAIN CARD -->
-  <div id="main-card">
-    <h1>Merry Christmas</h1>
-
-    <img src="WILL1.jpg" alt="WILL1">
-
-    <br>
-    <button onclick="openGame()">🎮 Play Mini Game</button>
-    <button onclick="openLetter()">💌 Open Letter</button>
-
-    <div id="game">
-      <p>Click the orange box 3 times to win!</p>
-      <div id="gameBox" onclick="countClicks()">Click me</div>
-      <p id="gameStatus"></p>
-    </div>
-
-    <div id="letter">
-      <p>Dear friend,<br><br>
-      Wishing you the warmest and happiest Christmas filled with laughter and peace 🎄✨<br>
-      Thank you for being amazing this year. May the next year bring you even more joy.<br><br>
-      With love,<br>
-      Your Irish friend 🎁</p>
+    <div class="letter">
+      <div class="seal">🎄</div>
+      <p>Click to open</p>
     </div>
   </div>
 
+  <!-- =========================
+  🎁 MAIN CONTENT
+  ========================== -->
+  <div id="main" class="hidden">
+    <div class="frame">
+      <img src="bow.png" class="bow">
+      <h1>Merry Christmas</h1>
+      <img src="WILL1.jpg" class="photo">
+
+      <div class="btn-group">
+        <button onclick="playGame()">🎮 Mini Game</button>
+        <button onclick="openLetter()">💌 Open Letter</button>
+      </div>
+      <img src="trees.png" class="trees">
+    </div>
+  </div>
+
+  <!-- =========================
+  ⚙️ script.js
+  ========================== -->
   <script>
-    // Intro → Main
-    document.getElementById("intro").addEventListener("click", () => {
-      document.getElementById("intro").style.display = "none";
-      document.getElementById("main-card").style.display = "block";
+    const intro = document.getElementById("intro");
+    const main = document.getElementById("main");
+
+    intro.addEventListener("click", () => {
+      intro.classList.add("hidden");
+      main.classList.remove("hidden");
     });
 
-    // Open Letter
+    function playGame() {
+      alert("Game coming soon 🎮🎄 (you can embed Canvas game or redirect)");
+    }
+
     function openLetter() {
-      document.getElementById("letter").style.display = "block";
-      document.getElementById("game").style.display = "none";
+      alert("Here’s where you put your heartfelt message 💌");
     }
-
-    // Open Mini Game
-    function openGame() {
-      document.getElementById("game").style.display = "block";
-      document.getElementById("letter").style.display = "none";
-    }
-
-    // Simple game
-    let clickCount = 0;
-    function countClicks() {
-      clickCount++;
-      if (clickCount >= 3) {
-        document.getElementById("gameStatus").textContent = "🎉 You win! Merry Christmas!";
-      } else {
-        document.getElementById("gameStatus").textContent = `Clicks: ${clickCount}/3`;
-      }
-    }
-
-    // Snowfall
-    function createSnowflake() {
-      const snowflake = document.createElement('div');
-      snowflake.textContent = Math.random() > 0.5 ? '❄' : '✦';
-      snowflake.classList.add('snowflake');
-      snowflake.style.left = Math.random() * window.innerWidth + 'px';
-      snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
-      snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
-      document.body.appendChild(snowflake);
-      setTimeout(() => snowflake.remove(), 10000);
-    }
-
-    setInterval(createSnowflake, 200);
   </script>
 </body>
 </html>
