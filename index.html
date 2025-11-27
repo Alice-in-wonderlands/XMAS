@@ -10,13 +10,17 @@
       font-family: "Georgia", serif;
       overflow: hidden;
     }
-    /* INTRO */
+
+    /* INTRO – nền sao */
     #intro {
       background: url("background-stars.jpg") center/cover no-repeat;
       height: 100vh;
       display:flex; justify-content:center; align-items:center;
       cursor:pointer;
+      position: relative;
+      z-index: 10;
     }
+
     .letter {
       width: 280px;
       height: 180px;
@@ -25,7 +29,11 @@
       display:flex; flex-direction:column; align-items:center; justify-content:center;
       position: relative;
       box-shadow: 0 0 20px rgba(255,255,255,0.7);
+      pointer-events: none; /* Ngăn con chặn event */
     }
+
+    .letter * { pointer-events: none; }
+
     .seal {
       position:absolute; bottom:10px;
       background:#b41f2a; color:white;
@@ -35,10 +43,12 @@
 
     /* MAIN */
     #main {
+      display: none;
       background: radial-gradient(circle at top, #14332B, #0B1A16);
       height: 100vh;
       display:flex; justify-content:center; align-items:center;
     }
+
     .frame {
       width: 80%; max-width: 800px;
       background: rgba(128, 13, 19, 0.95);
@@ -51,18 +61,21 @@
       border-radius: 10px;
       box-shadow:0 0 30px rgba(0,0,0,0.6);
     }
+
     .frame h1 {
       margin-top: 60px;
       font-size: 3.2rem;
       text-shadow: 3px 3px #390000;
       letter-spacing: 3px;
     }
+
     .photo {
       width: 60%;
       border-radius: 12px;
       margin: 20px auto;
       box-shadow:0 0 15px rgba(0,0,0,0.5);
     }
+
     .btn-group button {
       background:#d4af37;
       color:#6b0000;
@@ -74,16 +87,19 @@
       cursor:pointer;
       transition: 0.2s;
     }
+
     .btn-group button:hover {
       transform: scale(1.05);
       opacity:0.9;
     }
+
     .bow {
       width: 120px;
       position:absolute;
       top:-60px; left:50%;
       transform: translateX(-50%);
     }
+
     .trees {
       width:200px;
       position:absolute;
@@ -111,8 +127,6 @@
       from {opacity: 0; transform: scale(0.9);}
       to {opacity: 1; transform: scale(1);}
     }
-
-    .hidden {display:none;}
   </style>
 </head>
 
@@ -126,7 +140,7 @@
   </div>
 
   <!-- MAIN -->
-  <div id="main" class="hidden">
+  <div id="main">
     <div class="frame">
       <img src="bow.png" class="bow">
       <h1>Merry Christmas</h1>
@@ -139,7 +153,10 @@
 
       <div id="letterBox">
         Dear Will,<br><br>
-        Wishing you a magical Christmas filled with laughter, warmth and enough mince pies to question your life choices later. Thank you for being such a great friend this year – may 2026 bring you even more joy, success and slightly fewer questionable fashion trends.<br><br>
+        Wishing you a magical Christmas filled with laughter, warmth and enough mince pies
+        to question your life choices later. Thank you for being such a great friend this
+        year – may 2026 bring you even more joy, success and slightly fewer questionable
+        fashion trends.<br><br>
         Merry Christmas, from me with love 🎄✨
       </div>
 
@@ -153,8 +170,8 @@
     const letterBox = document.getElementById("letterBox");
 
     intro.addEventListener("click", () => {
-      intro.classList.add("hidden");
-      main.classList.remove("hidden");
+      intro.style.display = "none";
+      main.style.display = "flex";
     });
 
     function playGame() {
