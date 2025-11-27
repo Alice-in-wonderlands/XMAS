@@ -1,30 +1,22 @@
-<!-- =========================
-🎅 index.html
-========================= -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Merry Christmas</title>
 
-  <!-- CSS nhúng -->
   <style>
-    /* =========================
-    🎨 styles.css
-    ========================== */
-
     body {
       margin: 0;
       font-family: "Georgia", serif;
+      overflow: hidden;
     }
-
-    /* INTRO – nền sao */
+    /* INTRO */
     #intro {
       background: url("background-stars.jpg") center/cover no-repeat;
       height: 100vh;
       display:flex; justify-content:center; align-items:center;
+      cursor:pointer;
     }
-
     .letter {
       width: 280px;
       height: 180px;
@@ -33,18 +25,11 @@
       display:flex; flex-direction:column; align-items:center; justify-content:center;
       position: relative;
       box-shadow: 0 0 20px rgba(255,255,255,0.7);
-      cursor:pointer;
-      text-align:center;
     }
-
     .seal {
-      position:absolute;
-      bottom:10px;
-      background:#b41f2a;
-      color:white;
-      padding:10px;
-      border-radius:50%;
-      font-size:24px;
+      position:absolute; bottom:10px;
+      background:#b41f2a; color:white;
+      padding:10px; border-radius:50%; font-size:24px;
       box-shadow: 0 0 10px rgba(0,0,0,0.4);
     }
 
@@ -54,91 +39,93 @@
       height: 100vh;
       display:flex; justify-content:center; align-items:center;
     }
-
     .frame {
-      width: 80%;
-      max-width: 800px;
-      background: #800d13;
+      width: 80%; max-width: 800px;
+      background: rgba(128, 13, 19, 0.95);
+      padding: 40px;
       border: 25px solid transparent;
       border-image: url("candy-border.png") 30 round;
-      padding: 40px;
-      text-align: center;
-      color: #fffdf6;
-      position: relative;
-      box-shadow: 0 0 30px rgba(0,0,0,0.6);
+      text-align:center;
+      position:relative;
+      color:white;
+      border-radius: 10px;
+      box-shadow:0 0 30px rgba(0,0,0,0.6);
     }
-
     .frame h1 {
-      font-size: 3rem;
       margin-top: 60px;
+      font-size: 3.2rem;
       text-shadow: 3px 3px #390000;
       letter-spacing: 3px;
     }
-
     .photo {
       width: 60%;
-      border-radius: 10px;
+      border-radius: 12px;
       margin: 20px auto;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      box-shadow:0 0 15px rgba(0,0,0,0.5);
     }
-
-    .btn-group {
-      margin-top: 20px;
-    }
-
     .btn-group button {
-      background: #d4af37;
-      color: #6b0000;
-      border: none;
-      padding: 12px 20px;
-      font-size: 16px;
-      margin: 0 10px;
-      border-radius: 8px;
-      cursor:pointer;
+      background:#d4af37;
+      color:#6b0000;
+      border:none;
+      padding:12px 20px;
+      margin:10px;
+      border-radius:8px;
       font-weight:bold;
+      cursor:pointer;
       transition: 0.2s;
     }
-
     .btn-group button:hover {
       transform: scale(1.05);
-      opacity: 0.9;
+      opacity:0.9;
     }
-
     .bow {
       width: 120px;
-      position: absolute;
-      top: -60px;
-      left: 50%;
+      position:absolute;
+      top:-60px; left:50%;
       transform: translateX(-50%);
     }
-
     .trees {
-      width: 200px;
-      position: absolute;
-      bottom: -70px;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 0.9;
+      width:200px;
+      position:absolute;
+      bottom:-70px; left:50%;
+      transform:translateX(-50%);
     }
 
-    .hidden { display: none; }
+    /* LETTER */
+    #letterBox {
+      display: none;
+      margin-top: 20px;
+      background: rgba(255,255,255,0.9);
+      color:#333;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 70%;
+      margin-left:auto; margin-right:auto;
+      font-size: 1rem;
+      line-height: 1.5;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      animation: letterOpen 0.4s ease forwards;
+    }
+
+    @keyframes letterOpen {
+      from {opacity: 0; transform: scale(0.9);}
+      to {opacity: 1; transform: scale(1);}
+    }
+
+    .hidden {display:none;}
   </style>
 </head>
 
 <body>
-  <!-- =========================
-  📩 INTRO GIAO DIỆN
-  ========================== -->
+  <!-- INTRO -->
   <div id="intro">
     <div class="letter">
-      <div class="seal">🎄</div>
       <p>Click to open</p>
+      <div class="seal">🎄</div>
     </div>
   </div>
 
-  <!-- =========================
-  🎁 MAIN CONTENT
-  ========================== -->
+  <!-- MAIN -->
   <div id="main" class="hidden">
     <div class="frame">
       <img src="bow.png" class="bow">
@@ -149,16 +136,21 @@
         <button onclick="playGame()">🎮 Mini Game</button>
         <button onclick="openLetter()">💌 Open Letter</button>
       </div>
+
+      <div id="letterBox">
+        Dear Will,<br><br>
+        Wishing you a magical Christmas filled with laughter, warmth and enough mince pies to question your life choices later. Thank you for being such a great friend this year – may 2026 bring you even more joy, success and slightly fewer questionable fashion trends.<br><br>
+        Merry Christmas, from me with love 🎄✨
+      </div>
+
       <img src="trees.png" class="trees">
     </div>
   </div>
 
-  <!-- =========================
-  ⚙️ script.js
-  ========================== -->
   <script>
     const intro = document.getElementById("intro");
     const main = document.getElementById("main");
+    const letterBox = document.getElementById("letterBox");
 
     intro.addEventListener("click", () => {
       intro.classList.add("hidden");
@@ -166,11 +158,11 @@
     });
 
     function playGame() {
-      alert("Game coming soon 🎮🎄 (you can embed Canvas game or redirect)");
+      alert("🎮 Coming soon: Catch the Snowflakes Mini Game!");
     }
 
     function openLetter() {
-      alert("Here’s where you put your heartfelt message 💌");
+      letterBox.style.display = "block";
     }
   </script>
 </body>
