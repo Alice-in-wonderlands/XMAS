@@ -32,7 +32,6 @@
         }
     </script>
     <style>
-        /* Hiệu ứng đèn Giáng Sinh */
         .light-string {
             position: absolute;
             top: 0; left: 0; width: 100%;
@@ -47,7 +46,6 @@
             box-shadow: 0 0 10px white;
         }
 
-        /* Bố cục Postcard */
         .postcard-container {
             background-color: #FDF5E6;
             background-image: radial-gradient(#dbd2bc 0.5px, transparent 0.5px);
@@ -120,6 +118,7 @@
 
         <div id="sealed-envelope-stage" class="hidden flex-col items-center justify-center">
             <div class="relative w-full max-w-md aspect-[4/3] bg-red-800 rounded-lg shadow-[0_30px_60px_rgba(0,0,0,0.5)] border-4 border-gold/20 flex items-center justify-center cursor-pointer overflow-hidden group" onclick="openSealedEnvelope()">
+                
                 <div id="envelope-flap" class="absolute top-0 left-0 w-full h-1/2 bg-red-900 z-20 origin-top transition-transform duration-700" style="clip-path: polygon(0 0, 100% 0, 50% 100%);"></div>
                 
                 <div id="envelope-seal" class="absolute top-1/2 left-1/2 z-30 transition-all duration-700"
@@ -129,8 +128,8 @@
                     </div>
                 </div>
 
-                <div class="text-center z-10 mt-10">
-                    <p id="envelope-recipient-name" class="text-gold font-handwriting text-2xl"></p>
+                <div class="text-center z-10 mt-32">
+                    <p id="envelope-recipient-name" class="text-gold font-handwriting text-2xl drop-shadow-sm"></p>
                 </div>
             </div>
             <p class="text-white mt-6 font-festive text-xl">Chạm vào phong bì để xé tem...</p>
@@ -141,7 +140,6 @@
                 
                 <div class="absolute top-0 left-0 p-2">🍃🍒</div>
                 <div class="absolute bottom-0 right-0 p-2">🍒🍃</div>
-
                 <div class="postcard-divider hidden md:block"></div>
 
                 <div class="w-full md:w-1/2 md:pr-10 flex flex-col">
@@ -154,13 +152,11 @@
                     <div class="stamp-area mb-12 rotate-3">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Royal_Mail_logo.svg/1024px-Royal_Mail_logo.svg.png" class="w-16 grayscale opacity-70">
                     </div>
-
                     <div class="w-full space-y-8 mt-4">
                         <div class="address-line">To: <span id="addr-name" class="ml-4 text-xl font-bold"></span></div>
                         <div class="address-line">North Pole, Christmas Lane</div>
                         <div class="address-line">Happiness Street 1225</div>
                     </div>
-
                     <div class="mt-auto pt-8">
                         <button id="outro-button" onclick="loadOutroMessage()" class="bg-christmas-green text-white px-6 py-2 rounded-full text-sm hover:bg-green-800 transition-colors">
                              Mở lời chúc bí mật ✨
@@ -174,7 +170,7 @@
     </div>
 
     <script>
-        const apiKey = ""; // <--- DÁN API KEY VÀO ĐÂY ĐỂ AI CHẠY
+        const apiKey = ""; // <--- DÁN API KEY VÀO ĐÂY
         const API_MODEL = 'gemini-1.5-flash';
 
         const recipientNamesMap = { caitlin: 'Caitlin', sophie: 'Sophie', dan: 'Dan', gemma: 'Gemma' };
@@ -189,9 +185,9 @@
 
         function openCover() {
             document.getElementById('merry-christmas-cover').classList.add('hidden');
-            document.getElementById('password-stage').classList.remove('flex');
-            document.getElementById('password-stage').classList.remove('hidden');
-            document.getElementById('password-stage').classList.add('flex');
+            const pwdStage = document.getElementById('password-stage');
+            pwdStage.classList.remove('hidden');
+            pwdStage.classList.add('flex');
         }
 
         function checkPassword() {
@@ -200,8 +196,9 @@
                 currentRecipient = val;
                 document.getElementById('password-stage').classList.replace('flex', 'hidden');
                 document.getElementById('envelope-recipient-name').innerText = "To: " + recipientNamesMap[val];
-                document.getElementById('sealed-envelope-stage').classList.remove('hidden');
-                document.getElementById('sealed-envelope-stage').classList.add('flex');
+                const envStage = document.getElementById('sealed-envelope-stage');
+                envStage.classList.remove('hidden');
+                envStage.classList.add('flex');
                 loadIntroMessage(recipientNamesMap[val]);
             } else {
                 document.getElementById('error-message').classList.remove('hidden');
@@ -209,7 +206,6 @@
         }
 
         function openSealedEnvelope() {
-            // Hiệu ứng mở nắp và mất tem
             document.getElementById('envelope-flap').style.transform = 'rotateX(180deg)';
             const seal = document.getElementById('envelope-seal');
             seal.style.opacity = '0';
@@ -242,8 +238,9 @@
 
         function renderPostcard() {
             const data = letterContents[currentRecipient];
-            document.getElementById('card-stage').classList.remove('hidden');
-            document.getElementById('card-stage').classList.add('flex');
+            const cardStage = document.getElementById('card-stage');
+            cardStage.classList.remove('hidden');
+            cardStage.classList.add('flex');
             document.getElementById('recipient-photo').src = data.image;
             document.getElementById('main-message').innerText = data.message;
             document.getElementById('addr-name').innerText = recipientNamesMap[currentRecipient];
@@ -255,7 +252,7 @@
             btn.disabled = true;
 
             if (!apiKey) {
-                document.getElementById('ai-outro-message').innerText = "Chúc bạn một mùa đông thật ấm áp bên gia đình!";
+                document.getElementById('ai-outro-message').innerText = "Hạnh phúc nhé, người bạn tuyệt vời của tớ!";
                 btn.classList.add('hidden');
                 return;
             }
@@ -272,11 +269,11 @@
                 document.getElementById('ai-outro-message').innerText = data.candidates[0].content.parts[0].text;
             } catch (e) {
                 btn.classList.add('hidden');
-                document.getElementById('ai-outro-message').innerText = "Hạnh phúc nhé, người bạn tuyệt vời của tớ!";
+                document.getElementById('ai-outro-message').innerText = "Chúc bạn một mùa đông thật ấm áp!";
             }
         }
 
-        // --- HIỆU ỨNG TUYẾT ---
+        // Tuyết rơi
         const canvas = document.getElementById('snow-canvas');
         const ctx = canvas.getContext('2d');
         let flakes = [];
@@ -284,14 +281,7 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             flakes = [];
-            for(let i=0; i<100; i++) {
-                flakes.push({
-                    x: Math.random()*canvas.width, 
-                    y: Math.random()*canvas.height, 
-                    r: Math.random()*3+1, 
-                    d: Math.random()*1
-                });
-            }
+            for(let i=0; i<100; i++) flakes.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*3+1, d: Math.random()*1});
         }
         function drawSnow() {
             ctx.clearRect(0,0,canvas.width, canvas.height);
