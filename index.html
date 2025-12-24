@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Christmas Postcard Experience</title>
+    <title>Long Distance Christmas Postcard with AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Mountain+Reach&family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet"> 
     
     <script>
         tailwind.config = {
@@ -32,137 +32,34 @@
         }
     </script>
     <style>
+        /* Hiệu ứng đèn Giáng Sinh */
         .light-string {
-            position: absolute; top: 0; left: 0; width: 100%; height: 40px;
-            display: flex; justify-content: space-around; z-index: 60; pointer-events: none;
+            position: absolute;
+            top: 0; left: 0; width: 100%;
+            height: 40px;
+            display: flex; justify-content: space-around;
+            z-index: 60;
+            pointer-events: none;
         }
-        .light { width: 12px; height: 12px; border-radius: 50%; box-shadow: 0 0 10px white; }
+        .light {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px white;
+        }
 
+        /* Bố cục Postcard */
         .postcard-container {
             background-color: #FDF5E6;
             background-image: radial-gradient(#dbd2bc 0.5px, transparent 0.5px);
             background-size: 10px 10px;
-            border: 12px solid white;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3), inset 0 0 60px rgba(0,0,0,0.05);
+            border: 15px solid white;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3), inset 0 0 100px rgba(0,0,0,0.05);
             position: relative;
-            min-height: 450px;
+            min-height: 500px;
         }
 
+        /* Đường kẻ dọc chia đôi bưu thiếp */
         .postcard-divider {
-            position: absolute; left: 50%; top: 10%; bottom: 10%; width: 2px;
-            background: linear-gradient(to bottom, transparent, #8B4513, transparent); opacity: 0.2;
-        }
-
-        .stamp-area {
-            width: 80px; height: 90px; border: 2px dashed #8B4513;
-            display: flex; align-items: center; justify-content: center;
-            background: rgba(255,255,255,0.5); transform: rotate(3deg);
-        }
-
-        .address-line { border-bottom: 1px solid #8B4513; margin-bottom: 1.5rem; width: 100%; }
-    </style>
-</head>
-
-<body class="bg-christmas-green min-h-screen flex items-center justify-center p-4 overflow-hidden relative">
-    
-    <div class="light-string">
-        <div class="light bg-red-500 animate-twinkle"></div>
-        <div class="light bg-yellow-400 animate-twinkle" style="animation-delay: 0.2s"></div>
-        <div class="light bg-blue-500 animate-twinkle" style="animation-delay: 0.4s"></div>
-        <div class="light bg-green-500 animate-twinkle" style="animation-delay: 0.6s"></div>
-        <div class="light bg-red-500 animate-twinkle" style="animation-delay: 0.8s"></div>
-    </div>
-
-    <canvas id="snow-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-40"></canvas>
-
-    <div id="app-container" class="w-full max-w-5xl relative z-10 transition-all duration-500">
-
-        <div id="merry-christmas-cover" class="bg-christmas-red rounded-3xl shadow-2xl flex flex-col items-center justify-center p-12 cursor-pointer hover:scale-[1.01] border-8 border-gold/30 transition-transform" onclick="openCover()">
-            <div class="text-white text-6xl md:text-8xl font-festive font-bold tracking-tighter animate-pulse text-center">
-                Merry Christmas
-            </div>
-            <div class="mt-8 px-8 py-3 bg-gold text-christmas-green font-bold rounded-full transform -rotate-2 shadow-lg text-xl">
-                FROM ALICE WITH LOVE
-            </div>
-            <p class="text-white/80 mt-12 animate-bounce font-handwriting text-2xl">Nhấn để nhận thư... ❄️</p>
-        </div>
-
-        <div id="password-stage" class="hidden flex-col items-center justify-center animate-fadeIn">
-            <div class="bg-white/95 backdrop-blur p-10 rounded-2xl shadow-2xl w-full max-w-sm border-t-8 border-christmas-red text-center">
-                <h2 class="text-3xl font-festive font-bold text-christmas-red mb-6">Bạn là ai nhỉ?</h2>
-                <input type="password" id="password-input" placeholder="Ví dụ: Dan..." 
-                       class="w-full p-4 border-2 border-gold/30 rounded-xl focus:outline-none focus:border-christmas-red text-center text-xl mb-6 bg-paper-cream/50 font-bold">
-                <button onclick="checkPassword()" class="w-full py-4 bg-christmas-red text-white font-bold text-xl rounded-xl hover:bg-red-700 transition-all shadow-lg">
-                    KIỂM TRA 🎁
-                </button>
-                <p id="error-message" class="text-red-600 mt-4 hidden font-bold">Hmm, không thấy tên này trong danh sách!</p>
-            </div>
-        </div>
-
-        <div id="sealed-envelope-stage" class="hidden flex-col items-center justify-center animate-fadeIn">
-            <div class="relative w-full max-w-md aspect-[4/3] bg-red-800 rounded-lg shadow-[0_30px_60px_rgba(0,0,0,0.6)] border-4 border-gold/20 cursor-pointer overflow-hidden group" onclick="openSealedEnvelope()">
-                
-                <div id="envelope-flap" class="absolute top-0 left-0 w-full h-1/2 bg-red-900 z-20 origin-top transition-transform duration-700 shadow-md" style="clip-path: polygon(0 0, 100% 0, 50% 100%);"></div>
-
-                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
-                    <div class="w-24 h-24 bg-gold rounded-full flex items-center justify-center shadow-[0_5px_15px_rgba(0,0,0,0.4)] border-4 border-red-900/50 group-hover:scale-110 transition-transform duration-300">
-                        <span class="text-5xl drop-shadow-md">🎄</span>
-                    </div>
-                </div>
-
-                <div class="absolute bottom-10 w-full text-center z-10">
-                    <p id="envelope-recipient-name" class="text-gold font-handwriting text-4xl drop-shadow-md"></p>
-                    <p class="text-white/40 mt-6 font-festive text-sm uppercase tracking-widest animate-pulse">Nhấn để xé tem</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="card-stage" class="hidden flex-col animate-fadeIn">
-            <div class="postcard-container rounded-sm flex flex-col md:flex-row p-6 md:p-12 text-stone-800 font-handwriting relative">
-                
-                <div class="postcard-divider hidden md:block"></div>
-
-                <div class="w-full md:w-1/2 md:pr-12 flex flex-col">
-                    <div class="p-2 bg-white shadow-md border inline-block self-start -rotate-3 mb-6 transform hover:rotate-0 transition-transform">
-                        <img id="recipient-photo" src="" class="w-36 h-36 object-cover grayscale-[0.2]">
-                    </div>
-                    <div id="ai-intro-text" class="text-christmas-red font-bold text-lg mb-4"></div>
-                    <div id="main-message" class="text-xl leading-relaxed text-stone-900"></div>
-                    <p class="mt-auto pt-8 text-2xl text-christmas-red font-bold">Thân mến, <br> Alice.</p>
-                </div>
-
-                <div class="w-full md:w-1/2 md:pl-12 mt-12 md:mt-0 flex flex-col items-end">
-                    <div class="stamp-area mb-12 shadow-sm">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Royal_Mail_logo.svg/1024px-Royal_Mail_logo.svg.png" class="w-16 grayscale opacity-60">
-                    </div>
-
-                    <div class="w-full space-y-8 mt-4">
-                        <div class="address-line">To: <span id="addr-name" class="ml-4 font-bold text-2xl"></span></div>
-                        <div class="address-line">1225 Christmas Lane</div>
-                        <div class="address-line">The North Pole, Snowland</div>
-                    </div>
-
-                    <div class="mt-auto pt-10">
-                        <button id="outro-button" onclick="loadOutroMessage()" class="bg-christmas-green text-paper-cream px-8 py-3 rounded-full font-bold shadow-md hover:bg-green-800 transition-all flex items-center">
-                             ✨ Lời chúc bí mật
-                        </button>
-                        <p id="ai-outro-message" class="text-lg text-christmas-red mt-6 italic max-w-xs text-right hidden"></p>
-                    </div>
-                </div>
-            </div>
-            <button onclick="location.reload()" class="mt-8 text-white/50 hover:text-white mx-auto font-bold flex items-center gap-2">
-                🔄 Gửi thư khác
-            </button>
-        </div>
-    </div>
-
-    <script>
-        const apiKey = ""; // DÁN KEY CỦA BẠN VÀO ĐÂY NHA
-        const API_MODEL = 'gemini-1.5-flash';
-
-        const recipientNamesMap = { caitlin: 'Caitlin', sophie: 'Sophie', dan: 'Dan', gemma: 'Gemma' };
-        const letterContents = {
-            caitlin: { image: 'WILL1.jpg', message: "Caitlin ơi, Giáng sinh xa nhau nhưng lòng vẫn gần. Chúc cậu một mùa lễ thật ấm áp và rạng rỡ nhé!" },
-            sophie: { image: 'WILL4.jpg', message: "Gửi Sophie, hy vọng bưu thiếp này mang theo chút tuyết và thật nhiều niềm vui tới phòng của cậu." },
-            dan: { image: 'WILL3.jpg', message: "Hey Dan! Chúc ông bạn một mùa Noel quẩy hết mình, ăn thật ngon và nhận quà mỏi tay nhé!" },
-            gemma: { image: 'WILL
+            position: absolute;
+            left: 50%; top: 10%; bottom: 10%;
+            width: 2px;
