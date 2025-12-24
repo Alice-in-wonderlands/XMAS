@@ -5,77 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Christmas Postcard Experience</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Mountain+Reach&family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet"> 
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'christmas-red': '#B22222', // Đỏ đậm Giáng sinh
-                        'christmas-green': '#064E3B', // Xanh lá đậm
-                        'gold': '#D4AF37', // Vàng kim
-                        'paper-cream': '#FDF5E6', // Màu kem giấy cũ
+                        'christmas-red': '#B22222',
+                        'christmas-green': '#064E3B',
+                        'gold': '#D4AF37',
+                        'paper-cream': '#FDF5E6',
                     },
                     fontFamily: {
-                        'handwriting': ['Homemade Apple', 'cursive'], // Font viết tay
-                        'festive': ['Mountains of Christmas', 'serif'], // Font tiêu đề lễ hội
+                        'handwriting': ['Homemade Apple', 'cursive'],
+                        'festive': ['Mountains of Christmas', 'serif'],
                     },
                     keyframes: {
-                        twinkle: { '0%, 100%': { opacity: 1 }, '50%': { opacity: 0.3 } } // Hiệu ứng nhấp nháy
+                        twinkle: { '0%, 100%': { opacity: 1 }, '50%': { opacity: 0.3 } }
                     },
                     animation: {
                         twinkle: 'twinkle 1.5s infinite ease-in-out',
+                        fadeIn: 'fadeIn 0.8s ease-out forwards',
                     }
                 }
             }
         }
     </script>
     <style>
-        /* --- CSS TÙY CHỈNH --- */
-
-        /* Dây đèn nhấp nháy phía trên */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
         .light-string {
             position: absolute; top: 0; left: 0; width: 100%; height: 40px;
             display: flex; justify-content: space-around; z-index: 60; pointer-events: none;
         }
         .light { width: 12px; height: 12px; border-radius: 50%; box-shadow: 0 0 10px white; }
 
-        /* Giao diện bưu thiếp (Postcard) */
         .postcard-container {
-            background-color: var(--tw-colors-paper-cream);
-            /* Tạo texture chấm nhỏ li ti giống giấy cũ */
+            background-color: #FDF5E6;
             background-image: radial-gradient(#dbd2bc 0.5px, transparent 0.5px);
             background-size: 10px 10px;
             border: 12px solid white;
-            /* Đổ bóng sâu để tạo cảm giác 3D */
             box-shadow: 0 20px 50px rgba(0,0,0,0.3), inset 0 0 60px rgba(0,0,0,0.05);
             position: relative;
-            min-height: 450px;
         }
 
-        /* Đường kẻ dọc chia đôi bưu thiếp */
         .postcard-divider {
             position: absolute; left: 50%; top: 10%; bottom: 10%; width: 2px;
-            background: linear-gradient(to bottom, transparent, #8B4513, transparent); opacity: 0.3;
+            background: linear-gradient(to bottom, transparent, #8B4513, transparent); opacity: 0.2;
         }
 
-        /* Khu vực dán tem */
         .stamp-area {
             width: 80px; height: 90px; border: 2px dashed #8B4513;
             display: flex; align-items: center; justify-content: center;
             background: rgba(255,255,255,0.5); transform: rotate(3deg);
         }
 
-        /* Dòng kẻ địa chỉ */
-        .address-line { border-bottom: 1px solid #8B4513; margin-bottom: 1.5rem; width: 100%; }
-
-        /* Trang trí góc */
-        .corner-deco { position: absolute; font-size: 1.5rem; z-index: 50; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1)); }
+        .address-line { border-bottom: 1px solid #8B4513; margin-bottom: 1.5rem; width: 100%; height: 1.5rem; }
     </style>
 </head>
 
-<body class="bg-christmas-green min-h-screen flex items-center justify-center p-4 overflow-hidden relative">
+<body class="bg-christmas-green min-h-screen flex items-center justify-center p-4 overflow-x-hidden relative">
     
     <div class="light-string">
         <div class="light bg-red-500 animate-twinkle"></div>
@@ -83,22 +73,57 @@
         <div class="light bg-blue-500 animate-twinkle" style="animation-delay: 0.4s"></div>
         <div class="light bg-green-500 animate-twinkle" style="animation-delay: 0.6s"></div>
         <div class="light bg-red-500 animate-twinkle" style="animation-delay: 0.8s"></div>
-        <div class="light bg-yellow-400 animate-twinkle" style="animation-delay: 1s"></div>
     </div>
 
-    <canvas id="snow-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-50"></canvas>
+    <canvas id="snow-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-40"></canvas>
 
-    <div id="app-container" class="w-full max-w-5xl relative z-10 transition-all duration-500">
+    <div id="app-container" class="w-full max-w-5xl flex items-center justify-center relative z-10">
 
-        <div id="merry-christmas-cover" class="bg-christmas-red rounded-3xl shadow-2xl flex flex-col items-center justify-center p-12 cursor-pointer hover:scale-[1.02] border-8 border-gold/30 transition-transform min-h-[60vh]" onclick="openCover()">
-            <div class="text-white text-6xl md:text-8xl font-festive font-bold tracking-tighter animate-pulse text-center drop-shadow-[0_5px_5px_rgba(0,0,0,0.5)]">
-                Merry Christmas
-            </div>
-            <div class="mt-8 px-8 py-3 bg-gold text-christmas-green font-bold rounded-full transform -rotate-2 shadow-lg text-xl">
-                BƯU THIẾP TỪ PHƯƠNG XA
-            </div>
-            <p class="text-white/80 mt-12 animate-bounce font-handwriting text-2xl">Nhấn vào đây để nhận thư... ❄️</p>
+        <div id="stage-1" class="w-full bg-christmas-red rounded-3xl shadow-2xl flex flex-col items-center justify-center p-12 cursor-pointer border-8 border-gold/30 min-h-[50vh] transition-transform hover:scale-[1.01]" onclick="goToStage(2)">
+            <h1 class="text-white text-6xl md:text-8xl font-festive font-bold text-center drop-shadow-lg">Merry Christmas</h1>
+            <div class="mt-8 px-8 py-3 bg-gold text-christmas-green font-bold rounded-full shadow-lg text-xl transform -rotate-2">BƯU THIẾP TỪ XA</div>
+            <p class="text-white/80 mt-12 animate-bounce font-handwriting text-2xl">Nhấn để xem thư... ❄️</p>
         </div>
 
-        <div id="password-stage" class="hidden flex-col items-center justify-center animate-fadeIn min-h-[70vh]">
-            <div class="bg-white/95 backdrop-blur p-1
+        <div id="stage-2" class="hidden w-full flex flex-col items-center justify-center animate-fadeIn min-h-[60vh]">
+            <div class="bg-white/95 backdrop-blur p-10 rounded-2xl shadow-2xl w-full max-w-md border-t-8 border-christmas-red text-center">
+                <h2 class="text-4xl font-festive font-bold text-christmas-red mb-4">Bạn là ai nhỉ?</h2>
+                <input type="password" id="password-input" placeholder="Nhập tên của bạn..." 
+                       class="w-full p-4 border-2 border-gold/30 rounded-xl focus:outline-none focus:border-christmas-red text-center text-xl mb-6 bg-paper-cream/50 font-bold"
+                       onkeyup="if(event.key === 'Enter') checkRecipient()">
+                <button onclick="checkRecipient()" class="w-full py-4 bg-christmas-red text-white font-bold text-xl rounded-xl hover:bg-red-700 transition-all shadow-lg">KIỂM TRA 🎁</button>
+                <p id="error-message" class="text-red-600 mt-4 hidden font-bold">Hmm, không thấy tên này trong danh sách!</p>
+            </div>
+        </div>
+
+        <div id="stage-3" class="hidden w-full flex flex-col items-center justify-center animate-fadeIn min-h-[60vh]">
+            <div class="relative w-full max-w-lg aspect-[4/3] bg-red-800 rounded-lg shadow-2xl border-4 border-gold/20 cursor-pointer overflow-hidden group" onclick="openEnvelope()">
+                <div id="envelope-flap" class="absolute top-0 left-0 w-full h-1/2 bg-red-900 z-10 origin-top transition-transform duration-700 shadow-lg" style="clip-path: polygon(0 0, 100% 0, 50% 100%);"></div>
+                
+                <div id="wax-seal" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 w-24 h-24 bg-gold rounded-full flex items-center justify-center shadow-2xl border-4 border-red-900/50 group-hover:scale-110 transition-transform">
+                    <span class="text-5xl">🎄</span>
+                </div>
+
+                <div class="absolute bottom-12 w-full text-center z-0">
+                    <p class="text-gold/60 text-sm uppercase tracking-widest mb-2">Special Delivery for</p>
+                    <p id="envelope-name" class="text-gold font-handwriting text-5xl drop-shadow-md"></p>
+                </div>
+            </div>
+            <p class="text-white mt-8 font-festive text-xl animate-pulse">Nhấn vào con tem để mở thư</p>
+        </div>
+
+        <div id="stage-4" class="hidden w-full flex flex-col animate-fadeIn">
+            <div class="postcard-container rounded-sm flex flex-col md:flex-row p-6 md:p-12 text-stone-800 font-handwriting relative">
+                
+                <div class="postcard-divider hidden md:block"></div>
+
+                <div class="w-full md:w-1/2 md:pr-10 flex flex-col relative z-10">
+                    <div class="p-2 bg-white shadow-lg border inline-block self-start -rotate-3 mb-6">
+                        <img id="postcard-img" src="" class="w-32 h-32 object-cover">
+                    </div>
+                    <div id="ai-intro" class="text-christmas-red font-bold text-lg mb-4 italic"></div>
+                    <div id="postcard-msg" class="text-xl leading-relaxed text-stone-900 min-h-[150px]"></div>
+                    <p class="mt-auto pt-8 text-2xl text-christmas-red font-bold">Thân mến, Alice.</p>
+                </div>
+
+                <div class="w-full md:w-1/2 md:pl-10 mt-12 md:mt-0 flex flex-col items-end relative z-10">
