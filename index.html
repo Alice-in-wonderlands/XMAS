@@ -3,260 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Christmas Postcard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet"> 
+    <title>Xin Chào! | Your ITG Welcome Kit</title>
+    <!-- Google Fonts: Be Vietnam Pro cho vibe Việt Nam hiện đại -->
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome cho các icon vui nhộn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'christmas-red': '#B22222',
-                        'christmas-green': '#03241b',
-                        'gold': '#D4AF37',
-                        'paper-cream': '#FDF5E6',
-                    },
-                    fontFamily: {
-                        'handwriting': ['Homemade Apple', 'cursive'],
-                        'festive': ['Mountains of Christmas', 'serif'],
-                    },
-                    keyframes: {
-                        twinkle: { '0%, 100%': { opacity: 1 }, '50%': { opacity: 0.3 } }
-                    },
-                    animation: {
-                        twinkle: 'twinkle 1.5s infinite ease-in-out',
-                    }
-                }
-            }
-        }
-    </script>
     <style>
-        .light-string { position: absolute; top: 0; left: 0; width: 100%; height: 40px; display: flex; justify-content: space-around; z-index: 60; pointer-events: none; }
-        .light { width: 12px; height: 12px; border-radius: 50%; box-shadow: 0 0 10px white; }
-        .postcard-container {
-            background-color: #FDF5E6;
-            background-image: radial-gradient(#dbd2bc 0.5px, transparent 0.5px);
-            background-size: 10px 10px;
-            border: 15px solid white;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3), inset 0 0 100px rgba(0,0,0,0.05);
-            position: relative;
-            min-height: 520px;
+        :root {
+            --primary: #FF5F5D; /* Cam đỏ năng động */
+            --secondary: #3F72AF; /* Xanh dương tin cậy */
+            --accent: #FFD369; /* Vàng nắng khởi đầu mới */
+            --bg: #F9F7F7;
+            --text: #112D4E;
         }
-        .postcard-divider { position: absolute; left: 50%; top: 10%; bottom: 10%; width: 2px; background: linear-gradient(to bottom, transparent, #8B4513, transparent); opacity: 0.3; }
-        .stamp-area { width: 85px; height: 105px; border: 2px dashed #8B4513; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.5); overflow: hidden; }
-        .address-line { border-bottom: 1px solid #8B4513; margin-bottom: 1.5rem; width: 100%; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
+
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            margin: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* --- Header & Navigation --- */
+        nav {
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* --- Hero Section: Lời chào bùng nổ --- */
+        .hero {
+            padding: 100px 5%;
+            text-align: center;
+            background: linear-gradient(135deg, #fff 0%, #fff1f1 100%);
+            clip-path: ellipse(150% 100% at 50% 0%);
+        }
+
+        .badge {
+            background: var(--accent);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+            transform: rotate(-2deg);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: #555;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .btn-main { background: var(--primary); color: white; }
+        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255,95,93,0.3); }
+
+        /* --- Survival Guide Section --- */
+        .section-title {
+            text-align: center;
+            margin: 80px 0 40px;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 0 5%;
+        }
+
+        .guide-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            border-bottom: 5px solid var(--accent);
+            transition: 0.3s;
+        }
+
+        .guide-card:hover { transform: translateY(-10px); }
+        
+        .guide-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        /* --- Team Section: Meet the Minds --- */
+        .team-section {
+            background: var(--text);
+            color: white;
+            padding: 80px 5%;
+            margin-top: 100px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .member-card {
+            text-align: center;
+        }
+
+        .member-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid var(--accent);
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        /* --- Marquee: Hiệu ứng chạy chữ vui nhộn --- */
+        .marquee {
+            background: var(--primary);
+            color: white;
+            padding: 15px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            font-weight: 600;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+        }
     </style>
 </head>
+<body>
 
-<body class="bg-christmas-green min-h-screen flex items-center justify-center p-4 md:py-12 overflow-y-auto" onclick="playMusic()">
-    
-    <audio id="christmas-music" loop>
-        <source src="song.mp3" type="audio/mpeg">
-    </audio>
-
-    <div class="light-string">
-        <div class="light bg-red-500 animate-twinkle"></div>
-        <div class="light bg-yellow-400 animate-twinkle" style="animation-delay: 0.2s"></div>
-        <div class="light bg-blue-500 animate-twinkle" style="animation-delay: 0.4s"></div>
-        <div class="light bg-green-500 animate-twinkle" style="animation-delay: 0.6s"></div>
-        <div class="light bg-red-500 animate-twinkle" style="animation-delay: 0.8s"></div>
-    </div>
-
-    <canvas id="snow-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
-
-    <div id="app-container" class="w-full max-w-5xl relative z-10 my-auto">
-
-        <div id="merry-christmas-cover" class="bg-christmas-red rounded-3xl shadow-2xl flex flex-col items-center justify-center p-12 transition-all duration-500 cursor-pointer hover:scale-[1.01] border-8 border-gold/30" onclick="openCover()">
-            <div class="text-white text-6xl md:text-8xl font-festive font-bold tracking-tighter animate-pulse text-center">
-                Merry Christmas
-            </div>
-            <div class="mt-6 px-6 py-2 bg-gold text-christmas-green font-bold rounded-full transform -rotate-2 shadow-lg">
-                FROM ALICE WITH LOVE
-            </div>
-            <p class="text-white/70 mt-12 animate-bounce text-center">Click here to receive your letter... ❄️</p>
+    <nav>
+        <a href="#" class="logo">ITG.</a>
+        <div>
+            <a href="#guide" style="margin-right: 20px; text-decoration: none; color: var(--text);">Survival Guide</a>
+            <a href="#team" style="text-decoration: none; color: var(--text);">The Family</a>
         </div>
+    </nav>
 
-        <div id="password-stage" class="hidden flex-col items-center justify-center">
-            <div class="bg-white/95 backdrop-blur p-10 rounded-2xl shadow-2xl w-full max-w-sm border-t-8 border-christmas-red">
-                <h2 class="text-3xl font-festive font-bold text-christmas-red text-center mb-6">Identity Verification</h2>
-                <input type="text" id="password-input" placeholder="Enter your name..." 
-                       class="w-full p-4 border-2 border-gold/30 rounded-xl focus:outline-none focus:border-christmas-red text-center text-lg mb-6">
-                <button onclick="checkPassword()" class="w-full py-4 bg-christmas-red text-white font-bold rounded-xl hover:bg-red-700 transition-colors">
-                    OPEN GIFT 🎁
-                </button>
-                <p id="error-message" class="text-red-600 mt-4 text-center hidden italic text-sm">Members-only club! No guest passes today! 😌</p>
-            </div>
-        </div>
+    <header class="hero">
+        <div class="badge">Xin Chào Vietnam! 👋</div>
+        <h1>Your Home Away <br>From Home</h1>
+        <p>You’ve made it! Everything you need to kickstart your journey at ITG and survive HCMC like a local is right here.</p>
+        <a href="#guide" class="btn btn-main">Grab your Welcome Kit</a>
+    </header>
 
-        <div id="sealed-envelope-stage" class="hidden flex-col items-center justify-center">
-            <div class="relative w-full max-w-md aspect-[4/3] bg-red-800 rounded-lg shadow-2xl border-4 border-gold/20 flex items-center justify-center cursor-pointer overflow-hidden" onclick="openSealedEnvelope()">
-                <div id="envelope-flap" class="absolute top-0 left-0 w-full h-1/2 bg-red-900 z-20 origin-top transition-transform duration-700" style="clip-path: polygon(0 0, 100% 0, 50% 100%);"></div>
-                <div id="envelope-seal" class="absolute top-1/2 left-1/2 z-30 transition-all duration-700" style="transform: translate(-50%, -20%);">
-                    <div class="w-20 h-20 bg-gold rounded-full flex items-center justify-center shadow-lg border-4 border-yellow-600">
-                        <span class="text-4xl">🎄</span>
-                    </div>
-                </div>
-                <div class="text-center z-10 mt-44">
-                    <p id="envelope-recipient-name" class="text-gold font-handwriting text-2xl"></p>
-                </div>
-            </div>
-            <p class="text-white mt-6 font-festive text-xl text-center">Tap the envelope to break the seal...</p>
-        </div>
-
-        <div id="card-stage" class="hidden flex-col pb-12">
-            <div class="postcard-container rounded-sm flex flex-col md:flex-row p-6 md:p-10 text-stone-800 font-handwriting">
-                <div class="postcard-divider hidden md:block"></div>
-                
-                <div class="w-full md:w-1/2 md:pr-10 flex flex-col">
-                    <img id="recipient-photo" src="" class="w-32 h-32 rounded-lg object-cover border-4 border-white shadow-md mb-4 -rotate-3">
-                    <div id="ai-intro-text" class="text-christmas-red italic text-sm mb-4"></div>
-                    <div id="main-message" class="text-lg leading-loose overflow-y-auto max-h-[400px] pr-2 whitespace-pre-line"></div>
-                </div>
-
-                <div class="w-full md:w-1/2 md:pl-10 mt-10 md:mt-0 flex flex-col items-end">
-                    <div class="stamp-area mb-12 rotate-3 shadow-inner">
-                        <img id="recipient-stamp" src="" class="w-full h-full object-cover">
-                    </div>
-                    <div class="w-full space-y-8 mt-4">
-                        <div class="address-line">To: <span id="addr-name" class="ml-4 text-xl font-bold"></span></div>
-                        <div class="address-line">Saigon, Vietnam</div>
-                        <div class="address-line">Across the Miles</div>
-                    </div>
-                    
-                    <div class="mt-auto pt-10 w-full text-right">
-                        <button id="outro-button" onclick="loadOutroMessage()" class="bg-christmas-green text-white px-6 py-2 rounded-full text-sm hover:bg-green-800 transition-all shadow-md">
-                             Open Secret Wishes ✨
-                        </button>
-                        <p id="ai-outro-message" class="text-base text-christmas-red mt-4 italic font-bold"></p>
-                    </div>
-                </div>
-            </div>
-            
-            <button onclick="resetToStart()" class="mt-10 bg-gold hover:bg-yellow-500 text-christmas-green font-bold px-10 py-4 rounded-full shadow-2xl transition-all transform hover:scale-105 mx-auto block">
-                SEND ANOTHER LETTER ✉️
-            </button>
+    <div class="marquee">
+        <div class="marquee-content">
+            WELCOME TO THE FAMILY • XIN CHÀO • LET'S MAKE AN IMPACT • HỒ CHÍ MINH CITY 2026 • WORK HARD, PLAY HARDER • 
         </div>
     </div>
 
-    <script>
-        const recipientNamesMap = { 
-            caitlin: 'Caitlin', sophie: 'Sophie', dan: 'Dan', gemma: 'Gemma',
-            anya: 'Anya', zach: 'Zach', jordy: 'Jordy', hannah: 'Hannah', harriet: 'Harriet', libby: 'Libby', lizzie: 'Lizzie' };
+    <section id="guide">
+        <div class="section-title">
+            <h2>The Newbie's Cheat Sheet 🇻🇳</h2>
+            <p>Master the streets of Saigon in 5 minutes</p>
+        </div>
+        <div class="guide-grid">
+            <div class="guide-card">
+                <i class="fas fa-motorcycle"></i>
+                <h3>Grab & Be</h3>
+                <p>Traffic is an art! Download <b>Grab</b> or <b>Be</b>. Tip: "GrabBike" is the fastest way to get to ITG in rush hour.</p>
+            </div>
+            <div class="guide-card" style="border-bottom-color: var(--secondary);">
+                <i class="fas fa-coffee"></i>
+                <h3>Cà Phê Vibes</h3>
+                <p>Order a <i>"Cà phê sữa đá"</i> for a sweet kick. Our favorite spot is just 2 blocks away from the office!</p>
+            </div>
+            <div class="guide-card" style="border-bottom-color: var(--primary);">
+                <i class="fas fa-comments"></i>
+                <h3>Basic Slang</h3>
+                <p>Say <b>"Em ơi!"</b> to get attention in a cafe, and <b>"Một, hai, ba, dô!"</b> when you're out with the team.</p>
+            </div>
+        </div>
+    </section>
 
-        const letterContents = {
-            caitlin: { image: 'cait.jpg', stamp: 'cait1.jpg', message: "Merry Christmas, my dear Caitlin!\n\nI miss you deeply, and I’m so sorry we didn’t get the chance to properly meet and say goodbye at the end. That will always be a small regret in my heart.\n\nI miss you more than I can properly put into words. Even though you’ve gone back home, you’re still incredibly important to me and always will be.\n\nThank you for being such a special part of my life! I carry you with me in my heart!💖 I truly love you, and I wish you nothing but happiness, success, and beautiful things ahead.\n\nAlways thinking of you!\n\nLove, Alice" },
-            dan: { image: 'dan1.jpg', stamp: 'dan.jpg', message: "Merry Christmas, Dan!\n\nWishing you a very festive holiday season with your legendary harem of 1,000 wives😜 Hope you manage to keep up!\n\nMay your Christmas be loud, joyful, slightly chaotic, and full of good food and laughs.\n\nHave an amazing holiday and a great New Year ahead!\n\nCheers, Alice" },
-            gemma: { image: 'gem.jpg', stamp: 'cait.jpg', message: "Merry Christmas, Gemma!!!\n\nThank you for always supporting, caring for, and looking out for me over the past year!!!!!!!\nI’m truly grateful for everything you’ve done.\n\nWishing you a peaceful, happy Christmas filled with laughter, good food, and lovely moments with your family, Simon, and of course Bruce🐶\n\nWarmest wishes for the New Year ahead!!!!\n\nLove you sooo, Aliceee" },
-            zach: { image: 'zach.jpg', stamp: 'za.jpg', message: "Merry Christmas, Zach!\n\nHope you have a great holiday season filled with good food, good company, and plenty of rest.\n\nHopefully I’ll be less lazy next time and actually make it to our next badminton match — fingers crossed.\n\nWishing you lots of good health, and I’m really looking forward to seeing you fit, well, and ready to play.\n\nTake care, Alice" },
-            sophie: { image: 'so.jpg', stamp: 'so1.jpg', message: "Merry Christmas, Ms.Sophie!!\n\nThank you for all the lessons you’ve shared with me! They genuinely mean more than you know.\n\nI’ll always remember your energy and the positivity you bring wherever you go.\n\nWishing you great success and many exciting things ahead in the New Year!!\n\nWarm wishes, Alice" },
-            anya: { image: 'anya.jpg', stamp: 'anya1.jpg', message: "Merry Christmas, my dear Anya.\n\nI’m so grateful to have you in my life! You mean so much to me and truly make things brighter just by being you.\n\nNever forget how lovely you are!!!! You are always wonderful and beautiful in my eyes, exactly as you are!\n\nWishing you love, happiness, and many good things in the year ahead.\n\nWith love, Alice" },
-            libby: { image: 'Lib.jpg', stamp: 'lib1.jpg', message: "Hi Libby,\n\nI hope this holiday season brings you many beautiful memories and wonderful surprise gifts!\n\nBest, Alice" },
-            lizzie: { image: 'WILL3.jpg', stamp: 's8.jpg', message: "To Lizzie,\n\nWishing you a warm, peaceful Christmas Eve and may you always keep that bright smile on your face!\n\nCheers, Alice" },
-            ciara: { image: 'ha.jpg', stamp: 'cia.jpg', message: "Dear Ciara,\n\nHope you have a wonderful holiday and a very exciting start to the New Year!\n\nWarmly, Alice" },
-            harriet: { image: 'ha.jpg', stamp: 'harriet.jpg', message: "Hi Harriet,\n\nWishing you a Christmas as magical as a fairy tale. Thank you for everything!\n\nLove, Alice" },
-            hannah: { image: 'WILL2.jpg', stamp: 's11.jpg', message: "Dear Hannah,\n\nThank you for always being by my side. Wishing you a blast of a New Year!\n\nBest, Alice" },
-            jordy: { image: 'jo.jpg', stamp: 'jo1.jpg', message: "Merry Christmas, my queen Jordy!!\n\nThank you for the warmth, laughter, and just a touch of drama you bring. Life is undeniably brighter with you in it!\n\nWishing you a Christmas filled with joy and a New Year that treats you kindly and beautifully.\n\nWith all my love, Alice" }
-        };
+    <section class="team-section" id="team">
+        <div class="section-title">
+            <h2 style="color: white;">Meet the Minds</h2>
+            <p style="color: #aaa;">The amazing people you'll be working (and grabbing lunch) with</p>
+        </div>
+        <div class="team-grid">
+            <!-- Bạn hãy thay link ảnh của team vào đây nhé -->
+            <div class="member-card">
+                <img src="https://via.placeholder.com/150" alt="Jordy">
+                <h3>Jordy</h3>
+                <p>The Visionary</p>
+            </div>
+            <div class="member-card">
+                <img src="https://via.placeholder.com/150" alt="Will">
+                <h3>Will</h3>
+                <p>Strategy Guru</p>
+            </div>
+            <div class="member-card">
+                <img src="https://via.placeholder.com/150" alt="Alice">
+                <h3>Alice</h3>
+                <p>Content Queen</p>
+            </div>
+        </div>
+    </section>
 
-        let currentRecipient = "";
-        const music = document.getElementById('christmas-music');
-        let musicStarted = false;
+    <footer style="text-align: center; padding: 50px 0; font-size: 0.9rem; color: #888;">
+        <p>Made with ❤️ by ITG Marketing Team | 2026</p>
+    </footer>
 
-        function playMusic() {
-            if (!musicStarted) {
-                music.play().catch(() => {});
-                musicStarted = true;
-            }
-        }
-
-        function openCover() {
-            playMusic();
-            document.getElementById('merry-christmas-cover').style.display = 'none';
-            document.getElementById('password-stage').style.display = 'flex';
-        }
-
-        function checkPassword() {
-            const inputEl = document.getElementById('password-input');
-            const val = inputEl.value.toLowerCase().trim();
-            if (letterContents[val]) {
-                document.getElementById('password-stage').style.display = 'none';
-                document.getElementById('envelope-recipient-name').innerText = "To: " + recipientNamesMap[val];
-                document.getElementById('sealed-envelope-stage').style.display = 'flex';
-                currentRecipient = val;
-                document.getElementById('ai-intro-text').innerText = "Special delivery for " + recipientNamesMap[val] + "...";
-                document.getElementById('error-message').classList.add('hidden');
-                inputEl.value = ""; 
-            } else {
-                document.getElementById('error-message').classList.remove('hidden');
-            }
-        }
-
-        function openSealedEnvelope() {
-            document.getElementById('envelope-flap').style.transform = 'rotateX(180deg)';
-            const seal = document.getElementById('envelope-seal');
-            seal.style.opacity = '0';
-            seal.style.transform = 'translate(-50%, -150%)';
-            setTimeout(() => {
-                document.getElementById('sealed-envelope-stage').style.display = 'none';
-                renderPostcard();
-            }, 800);
-        }
-
-        function renderPostcard() {
-            const data = letterContents[currentRecipient];
-            document.getElementById('card-stage').style.display = 'flex';
-            document.getElementById('recipient-photo').src = data.image;
-            document.getElementById('recipient-stamp').src = data.stamp;
-            document.getElementById('main-message').innerText = data.message;
-            document.getElementById('addr-name').innerText = recipientNamesMap[currentRecipient];
-            
-            document.getElementById('outro-button').style.display = 'inline-block';
-            document.getElementById('ai-outro-message').innerText = "";
-        }
-
-        function loadOutroMessage() {
-            document.getElementById('outro-button').style.display = 'none';
-            document.getElementById('ai-outro-message').innerText = "May the coming year hold small joys, good health, and many reasons to smile!✨💖";
-        }
-
-        function resetToStart() {
-            document.getElementById('card-stage').style.display = 'none';
-            document.getElementById('password-stage').style.display = 'flex';
-            document.getElementById('envelope-flap').style.transform = 'rotateX(0deg)';
-            const seal = document.getElementById('envelope-seal');
-            seal.style.opacity = '1';
-            seal.style.transform = 'translate(-50%, -20%)';
-        }
-
-        // Snow Animation
-        const canvas = document.getElementById('snow-canvas');
-        const ctx = canvas.getContext('2d');
-        let flakes = [];
-        function initSnow() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            flakes = [];
-            for(let i=0; i<100; i++) flakes.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*3+1, d: Math.random()*1});
-        }
-        function drawSnow() {
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            ctx.fillStyle = "white";
-            ctx.beginPath();
-            flakes.forEach(f => {
-                ctx.moveTo(f.x, f.y);
-                ctx.arc(f.x, f.y, f.r, 0, Math.PI*2);
-                f.y += Math.cos(f.d) + 1 + f.r/2;
-                f.x += Math.sin(f.d) * 2;
-                if(f.y > canvas.height) { f.y = -10; f.x = Math.random()*canvas.width; }
-            });
-            ctx.fill();
-            requestAnimationFrame(drawSnow);
-        }
-        window.addEventListener('resize', initSnow);
-        window.onload = () => { initSnow(); drawSnow(); };
-    </script>
 </body>
 </html>
