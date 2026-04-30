@@ -3,249 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xin Chào! | Your ITG Welcome Kit</title>
-    <!-- Google Fonts: Be Vietnam Pro cho vibe Việt Nam hiện đại -->
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome cho các icon vui nhộn -->
+    <title>Welcome to ITG | Your Vietnam Journey Starts Here</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
-            --primary: #FF5F5D; /* Cam đỏ năng động */
-            --secondary: #3F72AF; /* Xanh dương tin cậy */
-            --accent: #FFD369; /* Vàng nắng khởi đầu mới */
-            --bg: #F9F7F7;
-            --text: #112D4E;
+            --primary: #0056b3; /* Xanh chuyên nghiệp nhưng sáng hơn */
+            --accent: #FF6B6B; /* Đỏ san hô năng động */
+            --yellow: #FFD93D;
+            --light-bg: #F8F9FA;
+            --dark-text: #1A1A1A;
+            --glass: rgba(255, 255, 255, 0.8);
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Be Vietnam Pro', sans-serif;
-            margin: 0;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--dark-text);
+            background-color: #fff;
+            overflow-x: hidden;
         }
 
-        /* --- Header & Navigation --- */
-        nav {
+        /* --- Header --- */
+        header {
+            position: fixed;
+            width: 100%;
             padding: 20px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: white;
-            position: sticky;
-            top: 0;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
-        .logo {
-            font-weight: 800;
-            font-size: 1.5rem;
-            color: var(--primary);
-            text-decoration: none;
-        }
+        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); text-decoration: none; }
+        .nav-links a { margin-left: 25px; text-decoration: none; color: var(--dark-text); font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
 
-        /* --- Hero Section: Lời chào bùng nổ --- */
+        /* --- Hero Section --- */
         .hero {
-            padding: 100px 5%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            background: linear-gradient(135deg, #fff 0%, #fff1f1 100%);
-            clip-path: ellipse(150% 100% at 50% 0%);
+            padding: 0 5%;
+            background: radial-gradient(circle at top right, #eef2f3, #ffffff);
+            position: relative;
         }
 
-        .badge {
-            background: var(--accent);
-            padding: 8px 20px;
+        .hero-content h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
+        .hero-content h1 span { color: var(--primary); }
+        .hero-content p { font-size: 1.2rem; color: #666; max-width: 700px; margin: 0 auto 30px; }
+        
+        .cta-btn {
+            padding: 18px 40px;
+            background: var(--dark-text);
+            color: white;
+            text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
-            display: inline-block;
-            margin-bottom: 20px;
-            transform: rotate(-2deg);
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 15px;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 30px;
-            color: #555;
-        }
-
-        .btn {
-            padding: 15px 35px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
             transition: 0.3s;
             display: inline-block;
-            margin: 10px;
         }
+        .cta-btn:hover { background: var(--accent); transform: scale(1.05); }
 
-        .btn-main { background: var(--primary); color: white; }
-        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255,95,93,0.3); }
+        /* --- Welcome Guide (New Section) --- */
+        .section { padding: 100px 8%; }
+        .section-tag { color: var(--accent); font-weight: 800; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 15px; display: block; }
+        .section-title { font-size: 2.5rem; margin-bottom: 50px; font-weight: 800; }
 
-        /* --- Survival Guide Section --- */
-        .section-title {
-            text-align: center;
-            margin: 80px 0 40px;
+        .guide-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .guide-item { 
+            padding: 40px; border-radius: 24px; background: var(--light-bg); transition: 0.3s;
+            border: 1px solid transparent;
         }
+        .guide-item:hover { background: white; border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .guide-item i { font-size: 2rem; margin-bottom: 20px; color: var(--accent); }
 
-        .guide-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            padding: 0 5%;
-        }
+        /* --- About Section --- */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .about-img { width: 100%; border-radius: 30px; filter: grayscale(20%); }
 
-        .guide-card {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            border-bottom: 5px solid var(--accent);
+        /* --- Services/Curriculum Section --- */
+        .services { background: var(--dark-text); color: white; }
+        .service-card { 
+            background: rgba(255,255,255,0.05); padding: 40px; border-radius: 20px;
             transition: 0.3s;
         }
+        .service-card:hover { background: var(--primary); }
 
-        .guide-card:hover { transform: translateY(-10px); }
-        
-        .guide-card i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
+        /* --- Team Section (Meet the Minds) --- */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .team-card { text-align: center; }
+        .team-card img { 
+            width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 20px; 
+            margin-bottom: 20px; transition: 0.5s;
+        }
+        .team-card:hover img { border-radius: 50%; transform: rotate(3deg); }
+
+        /* --- Contact Section --- */
+        .contact-box { 
+            background: var(--yellow); padding: 60px; border-radius: 40px; text-align: center;
         }
 
-        /* --- Team Section: Meet the Minds --- */
-        .team-section {
-            background: var(--text);
-            color: white;
-            padding: 80px 5%;
-            margin-top: 100px;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-        }
-
-        .member-card {
-            text-align: center;
-        }
-
-        .member-card img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 4px solid var(--accent);
-            object-fit: cover;
-            margin-bottom: 15px;
-        }
-
-        /* --- Marquee: Hiệu ứng chạy chữ vui nhộn --- */
-        .marquee {
-            background: var(--primary);
-            color: white;
-            padding: 15px 0;
-            overflow: hidden;
-            white-space: nowrap;
-            font-weight: 600;
-        }
-
-        .marquee-content {
-            display: inline-block;
-            animation: marquee 20s linear infinite;
-        }
-
-        @keyframes marquee {
-            from { transform: translateX(100%); }
-            to { transform: translateX(-100%); }
-        }
+        /* --- Marquee --- */
+        .marquee { background: var(--accent); color: white; padding: 15px 0; overflow: hidden; white-space: nowrap; }
+        .marquee div { display: inline-block; animation: scroll 25s linear infinite; font-weight: 800; font-size: 1.2rem; }
+        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .section { padding: 60px 5%; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="#" class="logo">ITG.</a>
-        <div>
-            <a href="#guide" style="margin-right: 20px; text-decoration: none; color: var(--text);">Survival Guide</a>
-            <a href="#team" style="text-decoration: none; color: var(--text);">The Family</a>
-        </div>
-    </nav>
-
-    <header class="hero">
-        <div class="badge">Xin Chào Vietnam! 👋</div>
-        <h1>Your Home Away <br>From Home</h1>
-        <p>You’ve made it! Everything you need to kickstart your journey at ITG and survive HCMC like a local is right here.</p>
-        <a href="#guide" class="btn btn-main">Grab your Welcome Kit</a>
+    <header>
+        <a href="#" class="logo">ITG<span>.</span></a>
+        <nav class="nav-links">
+            <a href="#about">About</a>
+            <a href="#guide">Survival Kit</a>
+            <a href="#services">Curriculum</a>
+            <a href="#team">Team</a>
+            <a href="#contact">Contact</a>
+        </nav>
     </header>
 
+    <section class="hero">
+        <div class="hero-content">
+            <span class="section-tag">Xin Chào! Welcome to Saigon</span>
+            <h1>Everything is <span>Better</span><br>When You're Here.</h1>
+            <p>Your official guide to settling in, working at ITG, and falling in love with the vibrant life of Vietnam.</p>
+            <a href="#guide" class="cta-btn">Unlock Your Welcome Kit</a>
+        </div>
+    </section>
+
     <div class="marquee">
-        <div class="marquee-content">
-            WELCOME TO THE FAMILY • XIN CHÀO • LET'S MAKE AN IMPACT • HỒ CHÍ MINH CITY 2026 • WORK HARD, PLAY HARDER • 
+        <div>
+            SAIGON VIBES • IB & IGCSE EXPERTS • COFFEE & CHAOS • WORK WITH PASSION • BEST TUTORS IN TOWN • XIN CHÀO • SAIGON VIBES • IB & IGCSE EXPERTS • COFFEE & CHAOS • WORK WITH PASSION • BEST TUTORS IN TOWN • 
         </div>
     </div>
 
-    <section id="guide">
-        <div class="section-title">
-            <h2>The Newbie's Cheat Sheet 🇻🇳</h2>
-            <p>Master the streets of Saigon in 5 minutes</p>
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="about-grid">
+            <div>
+                <span class="section-tag">Who we are</span>
+                <h2 class="section-title">More than just a tutoring center.</h2>
+                <p>ITG is a boutique educational hub specializing in international curricula. We don't just teach; we mentor. For our new team members, we are your first family in Vietnam.</p>
+                <br>
+                <p>Located in the heart of the city, we provide a premium learning environment for IB and IGCSE students.</p>
+            </div>
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800" class="about-img" alt="ITG Workspace">
         </div>
-        <div class="guide-grid">
-            <div class="guide-card">
+    </section>
+
+    <!-- Survival Kit Section (Cái mới bạn cần) -->
+    <section class="section" id="guide" style="background: #fff;">
+        <span class="section-tag">First time in VN?</span>
+        <h2 class="section-title">The Newbie Survival Kit</h2>
+        <div class="guide-container">
+            <div class="guide-item">
                 <i class="fas fa-motorcycle"></i>
-                <h3>Grab & Be</h3>
-                <p>Traffic is an art! Download <b>Grab</b> or <b>Be</b>. Tip: "GrabBike" is the fastest way to get to ITG in rush hour.</p>
+                <h3>Ride like a Local</h3>
+                <p>Download <b>Grab</b> or <b>Be</b> immediately. It's the "Uber" of Vietnam. Start with GrabCar if bikes look scary!</p>
             </div>
-            <div class="guide-card" style="border-bottom-color: var(--secondary);">
-                <i class="fas fa-coffee"></i>
-                <h3>Cà Phê Vibes</h3>
-                <p>Order a <i>"Cà phê sữa đá"</i> for a sweet kick. Our favorite spot is just 2 blocks away from the office!</p>
+            <div class="guide-item">
+                <i class="fas fa-mug-hot"></i>
+                <h3>Caffeine Fix</h3>
+                <p>Try <i>Cà Phê Muối</i> (Salt Coffee) - it's the trend of 2026. Careful, it's addictive!</p>
             </div>
-            <div class="guide-card" style="border-bottom-color: var(--primary);">
-                <i class="fas fa-comments"></i>
-                <h3>Basic Slang</h3>
-                <p>Say <b>"Em ơi!"</b> to get attention in a cafe, and <b>"Một, hai, ba, dô!"</b> when you're out with the team.</p>
+            <div class="guide-item">
+                <i class="fas fa-wallet"></i>
+                <h3>Money Talk</h3>
+                <p>Count the zeros! 500,000 VND is about $20. Always check your change twice.</p>
+            </div>
+            <div class="guide-item">
+                <i class="fas fa-heart"></i>
+                <h3>Em Ơi!</h3>
+                <p>The magic phrase to call for service anywhere. It literally means "Hey, younger sibling!"</p>
             </div>
         </div>
     </section>
 
-    <section class="team-section" id="team">
-        <div class="section-title">
-            <h2 style="color: white;">Meet the Minds</h2>
-            <p style="color: #aaa;">The amazing people you'll be working (and grabbing lunch) with</p>
+    <!-- Services Section -->
+    <section class="section services" id="services">
+        <span class="section-tag" style="color: var(--yellow);">What we do</span>
+        <h2 class="section-title" style="color: white;">Academic Excellence</h2>
+        <div class="guide-container">
+            <div class="service-card">
+                <h3>IB Diploma</h3>
+                <p>Comprehensive support for Internal Assessments and Final Exams.</p>
+            </div>
+            <div class="service-card">
+                <h3>IGCSE</h3>
+                <p>Building strong foundations for younger international students.</p>
+            </div>
+            <div class="service-card">
+                <h3>A-Levels</h3>
+                <p>Specialized tutoring for advanced subject mastery.</p>
+            </div>
         </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section" id="team">
+        <span class="section-tag">The ITG Family</span>
+        <h2 class="section-title">Meet the Minds</h2>
         <div class="team-grid">
-            <!-- Bạn hãy thay link ảnh của team vào đây nhé -->
-            <div class="member-card">
-                <img src="https://via.placeholder.com/150" alt="Jordy">
+            <div class="team-card">
+                <img src="https://via.placeholder.com/400" alt="Team 1">
                 <h3>Jordy</h3>
-                <p>The Visionary</p>
+                <p>Founder & Mentor</p>
             </div>
-            <div class="member-card">
-                <img src="https://via.placeholder.com/150" alt="Will">
+            <div class="team-card">
+                <img src="https://via.placeholder.com/400" alt="Team 2">
                 <h3>Will</h3>
-                <p>Strategy Guru</p>
+                <p>Academic Lead</p>
             </div>
-            <div class="member-card">
-                <img src="https://via.placeholder.com/150" alt="Alice">
+            <div class="team-card">
+                <img src="https://via.placeholder.com/400" alt="Team 3">
                 <h3>Alice</h3>
-                <p>Content Queen</p>
+                <p>Content Specialist</p>
+            </div>
+            <div class="team-card">
+                <img src="https://via.placeholder.com/400" alt="Team 4">
+                <h3>Calantha</h3>
+                <p>Administrator</p>
             </div>
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 50px 0; font-size: 0.9rem; color: #888;">
-        <p>Made with ❤️ by ITG Marketing Team | 2026</p>
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="contact-box">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Ready to join the vibe?</h2>
+            <p style="margin-bottom: 30px;">We're always looking for passionate educators and creative minds.</p>
+            <a href="mailto:hello@itg.edu.vn" class="cta-btn">Send us a Message</a>
+        </div>
+    </section>
+
+    <footer style="padding: 40px; text-align: center; font-size: 0.8rem; color: #999;">
+        © 2026 International Tutor Group | Made for the Newcomers
     </footer>
 
+    <script>
+        // Hiệu ứng cuộn mượt (Smooth Scroll)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
