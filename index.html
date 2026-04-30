@@ -7,25 +7,26 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-        body { font-family: 'Poppins', sans-serif; }
-        .hero-gradient { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('image_e4bfcf.jpg'); background-size: cover; background-position: center; }
-        .card-hover { transition: all 0.3s ease; }
-        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .map-btn { @apply inline-flex items-center px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold hover:bg-green-200 transition-colors mt-2; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .section-title { @apply text-3xl font-extrabold text-slate-900 mb-6 flex items-center gap-3; }
+        .card { @apply bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition-all; }
+        .map-link { @apply inline-flex items-center text-xs font-bold text-indigo-600 hover:text-indigo-800 mt-2 uppercase tracking-wider; }
+        .badge { @apply px-2 py-1 bg-indigo-100 text-indigo-700 text-[10px] font-bold rounded uppercase; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-50 text-slate-800 leading-relaxed">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="flex-shrink-0 font-bold text-2xl text-indigo-600 tracking-tight">ITG.HCMC</div>
-                <div class="hidden md:flex space-x-8 font-medium text-sm">
-                    <a href="#packing" class="hover:text-indigo-600">Packing</a>
+    <!-- Sidebar Menu (Desktop) / Bottom Nav (Mobile) -->
+    <nav class="fixed bottom-0 w-full bg-white/90 backdrop-blur-md border-t border-slate-200 z-50 md:top-0 md:bottom-auto md:border-b md:border-t-0">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-around md:justify-between items-center h-16">
+                <div class="hidden md:block font-extrabold text-xl text-indigo-600">ITG GUIDE</div>
+                <div class="flex space-x-4 md:space-x-8 text-[10px] md:text-sm font-bold uppercase tracking-tighter md:tracking-normal">
                     <a href="#arrival" class="hover:text-indigo-600">Arrival</a>
+                    <a href="#packing" class="hover:text-indigo-600">Packing</a>
                     <a href="#living" class="hover:text-indigo-600">Living</a>
+                    <a href="#transport" class="hover:text-indigo-600">Transport</a>
                     <a href="#food" class="hover:text-indigo-600">VN Food</a>
                     <a href="#dining" class="hover:text-indigo-600">Dining</a>
                 </div>
@@ -34,179 +35,237 @@
     </nav>
 
     <!-- Hero Section -->
-    <header class="hero-gradient h-screen flex items-center justify-center text-white text-center px-4">
-        <div class="max-w-3xl">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6">Welcome to Ho Chi Minh City!</h1>
-            <p class="text-xl md:text-2xl font-light mb-8 italic">"A swirl of sights, sounds, tastes, and culture"</p>
-            <a href="#packing" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-full font-bold transition-all inline-block">Start Your Adventure</a>
+    <header class="relative h-[70vh] flex items-center justify-center overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="HCMC">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 to-slate-900/90"></div>
+        <div class="relative text-center text-white px-6">
+            <h1 class="text-4xl md:text-7xl font-extrabold mb-4 tracking-tight">WELCOME TO <span class="text-indigo-400">HCMC</span></h1>
+            <p class="text-xl md:text-2xl font-light opacity-90 max-w-2xl mx-auto italic">"A swirl of sights, sounds, tastes, and culture that’s likely very different from what you’re accustomed to."</p>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 py-16">
+    <main class="max-w-6xl mx-auto px-6 py-20 space-y-24">
 
-        <!-- Welcome Section -->
-        <section class="mb-20 text-center">
-            <h2 class="text-3xl font-bold mb-6 text-slate-900 underline decoration-indigo-500 underline-offset-8">The New Tutor Guide</h2>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="text-left space-y-4">
-                    <p class="text-lg text-slate-600">Moving to a new city can feel overwhelming, but we've got you covered. This guide is your personalized roadmap to settling into life in this extraordinary city.</p>
-                    <p class="text-lg text-slate-600">From navigating local markets to finding the best pho place, your fellow tutors have shared their wisdom here.</p>
-                    <div class="p-4 bg-indigo-50 border-l-4 border-indigo-500 italic">
-                        "Good luck! Chúc may mắn!" - Gemma & Will
-                    </div>
-                </div>
-                <img src="image_e4befa.jpg" alt="HCMC Scene" class="rounded-2xl shadow-2xl">
+        <!-- Section 1: Introduction -->
+        <section id="welcome" class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="card bg-indigo-600 text-white p-10">
+                <h2 class="text-3xl font-bold mb-6">New Tutor Guide</h2>
+                <p class="mb-4 opacity-90">This booklet is your personalized guide to settling into life in this extraordinary city. It answers queries about navigating markets, public transport, customs, and etiquette.</p>
+                <p class="italic text-indigo-200">"While the booklet offers an excellent starting point, don’t hesitate to ask us or any team member whenever you have questions."</p>
+                <div class="mt-6 font-bold">— Gemma & Will</div>
+            </div>
+            <div class="space-y-4">
+                <img src="https://images.unsplash.com/photo-1620054700084-5eb3274618e4?q=80&w=1000&auto=format&fit=crop" class="rounded-2xl shadow-xl w-full h-64 object-cover" alt="ITG Center">
+                <p class="text-sm text-slate-500 italic text-center underline">International Tutor Group - Ho Chi Minh City</p>
             </div>
         </section>
 
-        <!-- What to Pack -->
-        <section id="packing" class="mb-20">
-            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-slate-100">
-                <h2 class="text-4xl font-bold mb-10 text-center"><i class="fa-solid fa-suitcase-rolling mr-4 text-indigo-500"></i>What to Pack?</h2>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Essentials -->
-                    <div class="space-y-4">
-                        <h3 class="text-xl font-semibold text-indigo-600 border-b pb-2">The Essentials</h3>
-                        <ul class="space-y-3 text-sm">
-                            <li class="flex items-start"><i class="fa-solid fa-check mt-1 mr-2 text-green-500"></i> Passport (valid > 6 months)</li>
-                            <li class="flex items-start"><i class="fa-solid fa-check mt-1 mr-2 text-green-500"></i> Laptop & Charger</li>
-                            <li class="flex items-start"><i class="fa-solid fa-check mt-1 mr-2 text-green-500"></i> 3-month supply of prescription meds</li>
-                        </ul>
-                    </div>
-                    <!-- Hard to find -->
-                    <div class="space-y-4">
-                        <h3 class="text-xl font-semibold text-indigo-600 border-b pb-2">Hard to find in VN</h3>
-                        <ul class="space-y-3 text-sm">
-                            <li class="flex items-start"><i class="fa-solid fa-circle-exclamation mt-1 mr-2 text-orange-500"></i> Tampons (pads are easy, tampons are not)</li>
-                            <li class="flex items-start"><i class="fa-solid fa-circle-exclamation mt-1 mr-2 text-orange-500"></i> Large Shoes (Male > size 10, Female > size 5)</li>
-                            <li class="flex items-start"><i class="fa-solid fa-circle-exclamation mt-1 mr-2 text-orange-500"></i> Preferred cosmetics & Suncream</li>
-                        </ul>
-                    </div>
-                    <!-- Work -->
-                    <div class="space-y-4">
-                        <h3 class="text-xl font-semibold text-indigo-600 border-b pb-2">For Work (ITG)</h3>
-                        <ul class="space-y-3 text-sm">
-                            <li class="flex items-start"><i class="fa-solid fa-briefcase mt-1 mr-2 text-blue-500"></i> Smart dress attire (Formal shoes)</li>
-                            <li class="flex items-start"><i class="fa-solid fa-briefcase mt-1 mr-2 text-blue-500"></i> Adapters (though they are easy to buy locally)</li>
-                        </ul>
+        <!-- Section 2: Preparing & Packing -->
+        <section id="packing">
+            <h2 class="section-title"><i class="fa-solid fa-box-open text-indigo-500"></i> Preparing for Arrival</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="card">
+                    <h3 class="font-bold text-indigo-600 mb-3 underline">Travel & Health</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><strong>Flights:</strong> Arrive at least 4 days before start date to recover from jetlag.</li>
+                        <li><strong>Passport:</strong> Must have > 6 months validity.</li>
+                        <li><strong>Health:</strong> Check general travel boosters with GP. Carry 3-month supply of prescription meds.</li>
+                        <li><strong>Insurance:</strong> ITG provides health insurance upon arrival. Take out travel insurance for the trip.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-indigo-600 mb-3 underline">Work Essentials</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><strong>ITG Clothing:</strong> Dress smartly. Check ITG Staff Dress Code.</li>
+                        <li><strong>Laptop:</strong> Bring your own laptop and charger.</li>
+                        <li><strong>Adapters:</strong> Easy to buy locally, but bring one for personal use.</li>
+                    </ul>
+                </div>
+                <div class="card bg-orange-50 border-orange-100">
+                    <h3 class="font-bold text-orange-700 mb-3 underline">Hard to find in HCMC</h3>
+                    <ul class="space-y-2 text-xs font-semibold text-slate-700">
+                        <li>• Tampons (Pads are easy)</li>
+                        <li>• Large Shoes (Male >10, Female >5)</li>
+                        <li>• Female Undergarments (Size 14+ / 12+)</li>
+                        <li>• Suncream (Locals use whiteners)</li>
+                        <li>• British Tea (Yorkshire/PG Tips)</li>
+                        <li>• Contact lenses/solution (Expensive)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Airport Arrival -->
+        <section id="arrival">
+            <h2 class="section-title"><i class="fa-solid fa-plane-arrival text-indigo-500"></i> Arriving in HCMC</h2>
+            <div class="card flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1542296332-2e4473faf563?q=80&w=1000&auto=format&fit=crop" class="rounded-xl mb-4 h-64 w-full object-cover" alt="Tan Son Nhat">
+                    <h4 class="font-bold text-lg mb-2">Tan Son Nhat Airport</h4>
+                    <p class="text-sm">Visit the <strong>visa department</strong> before passport control (left of passport booths). We will arrange transport to your accommodation. Someone will be waiting in the arrival hall.</p>
+                </div>
+                <div class="md:w-1/2 bg-slate-50 p-6 rounded-xl border-2 border-dashed border-slate-200">
+                    <h4 class="font-bold mb-4 italic text-slate-500 underline uppercase">The First Few Days:</h4>
+                    <ul class="space-y-4">
+                        <li class="flex gap-3"><i class="fa-solid fa-sim-card text-blue-500"></i> SIM Card & internet access provided.</li>
+                        <li class="flex gap-3"><i class="fa-solid fa-home text-blue-500"></i> Accommodation close to the center with local/western eateries.</li>
+                        <li class="flex gap-3"><i class="fa-solid fa-file-invoice text-blue-500"></i> Registration with local police (Landlord will assist).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Transport -->
+        <section id="transport">
+            <h2 class="section-title"><i class="fa-solid fa-motorcycle text-indigo-500"></i> Getting Around</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card border-l-8 border-indigo-500">
+                    <h3 class="font-bold text-xl mb-4">Motorbikes & Xe-Ôm</h3>
+                    <p class="text-sm mb-4">Foreigners get around by small motorbike, xe-ôm, or taxi.</p>
+                    <ul class="space-y-2 text-sm italic">
+                        <li>• License required for insurance & police.</li>
+                        <li>• Convert UK license to VN license (easier than a test).</li>
+                        <li>• Wear an EU standard helmet.</li>
+                        <li>• Recommended shops: <strong>Saigon Motorcycles, DC Motorbikes</strong>.</li>
+                    </ul>
+                </div>
+                <div class="card border-l-8 border-green-500">
+                    <h3 class="font-bold text-xl mb-4">Taxis & Apps</h3>
+                    <p class="text-sm mb-4">Inexpensive and easy. Use <strong>Grab, GoJek & Be</strong>.</p>
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <p class="font-bold text-green-800">Reliable Companies: Vinasun & Mai Linh.</p>
+                        <p class="text-xs mt-2 italic text-green-700">Cost: ~30k VND (short trip) to 150k VND (Thao Dien to city centre).</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Arrival & Vehicle -->
-        <section id="arrival" class="mb-20 grid md:grid-cols-2 gap-8">
-            <div class="bg-slate-900 text-white p-8 rounded-3xl">
-                <h2 class="text-3xl font-bold mb-6 italic text-indigo-400">Airport Arrival</h2>
-                <p class="mb-4">Visit the <strong>Visa Department</strong> (left of passport booths) before passport control.</p>
-                <img src="image_e4bc4a.jpg" alt="Airport Map" class="rounded-xl mb-4 opacity-80 hover:opacity-100 transition-opacity">
-                <ul class="space-y-2 text-sm text-slate-300">
-                    <li>• We'll arrange transport to your accommodation.</li>
-                    <li>• We'll provide a SIM card & essentials for your first days.</li>
-                </ul>
+        <!-- Section 5: Living & Rental Rules -->
+        <section id="living">
+            <h2 class="section-title"><i class="fa-solid fa-building text-indigo-500"></i> Areas & Rental Rules</h2>
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="card"><span class="badge">District 1</span><h4 class="font-bold my-2">The Heartbeat</h4><p class="text-xs">Dynamic fusion of old and new. Skyscrapers and colonial buildings.</p></div>
+                <div class="card"><span class="badge">District 3</span><h4 class="font-bold my-2">Local Charm</h4><p class="text-xs">Tree-lined streets, French colonial architecture, and quaint cafes.</p></div>
+                <div class="card"><span class="badge">Thao Dien</span><h4 class="font-bold my-2">Expat Bubble</h4><p class="text-xs">District 2. Serene, upscale, trendy boutiques and gourmet restaurants.</p></div>
             </div>
-            <div class="bg-indigo-600 text-white p-8 rounded-3xl relative overflow-hidden">
-                <h2 class="text-3xl font-bold mb-6 italic">Getting Around</h2>
-                <div class="space-y-6 relative z-10">
-                    <div>
-                        <h4 class="font-bold flex items-center"><i class="fa-solid fa-motorcycle mr-2"></i> Motorbikes</h4>
-                        <p class="text-sm opacity-90">License is required for insurance. Wear an EU standard helmet!</p>
-                    </div>
-                    <div>
-                        <h4 class="font-bold flex items-center"><i class="fa-solid fa-taxi mr-2"></i> Taxis & Apps</h4>
-                        <p class="text-sm opacity-90">Use <strong>Grab, GoJek or Be</strong>. Reliable companies: Vinasun & Mai Linh.</p>
+            
+            <div class="card bg-slate-900 text-white overflow-hidden relative">
+                <div class="p-8 relative z-10">
+                    <h3 class="text-2xl font-bold mb-6 text-indigo-400 underline decoration-white underline-offset-8">Rental Rules to Remember</h3>
+                    <div class="grid md:grid-cols-2 gap-8 text-sm">
+                        <ul class="space-y-3">
+                            <li><i class="fa-solid fa-file-contract mr-2"></i> <strong>Contract:</strong> Must be in writing. Request bilingual version.</li>
+                            <li><i class="fa-solid fa-money-bill-wave mr-2"></i> <strong>Deposit:</strong> Equivalent to 2 months' rent. Pay in VND.</li>
+                            <li><i class="fa-solid fa-plug mr-2"></i> <strong>Utilities:</strong> Electricity, water, internet usually extra.</li>
+                        </ul>
+                        <ul class="space-y-3">
+                            <li><i class="fa-solid fa-clock mr-2"></i> <strong>Lease:</strong> Usually 1 year, flexible.</li>
+                            <li><i class="fa-solid fa-door-open mr-2"></i> <strong>Notice:</strong> 1-3 months notice for termination.</li>
+                            <li><i class="fa-solid fa-user-shield mr-2"></i> <strong>Police:</strong> Landlord assists with residency registration.</li>
+                        </ul>
                     </div>
                 </div>
-                <img src="image_e4bc10.jpg" alt="Grab" class="absolute -bottom-4 -right-4 w-48 opacity-40">
+                <i class="fa-solid fa-key absolute -bottom-10 -right-10 text-[200px] opacity-10 rotate-12"></i>
             </div>
         </section>
 
-        <!-- VN Food Section -->
-        <section id="food" class="mb-20">
-            <h2 class="text-4xl font-bold mb-10 text-center text-slate-900">Must-Try Local Dishes</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Section 6: VN Food -->
+        <section id="food">
+            <h2 class="section-title"><i class="fa-solid fa-bowl-food text-indigo-500"></i> Must-Try Local Dishes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <!-- Pho -->
-                <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
-                    <img src="image_e4bbaf.jpg" alt="Pho" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2">Pho</h3>
-                        <p class="text-sm text-slate-600">Vietnam's most iconic noodle dish!</p>
-                    </div>
+                <div class="card group">
+                    <div class="overflow-hidden rounded-xl mb-4"><img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?q=80&w=1000&auto=format&fit=crop" class="w-full h-40 object-cover group-hover:scale-110 transition-transform"></div>
+                    <h4 class="font-bold">Pho</h4><p class="text-xs text-slate-500 mt-1 italic">Vietnam's most iconic noodle dish!</p>
                 </div>
                 <!-- Banh Mi -->
-                <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
-                    <img src="image_e4bbaf.jpg" alt="Banh Mi" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2">Banh Mi</h3>
-                        <p class="text-sm text-slate-600">A sandwich that combines French and Vietnamese flavours.</p>
-                    </div>
+                <div class="card group">
+                    <div class="overflow-hidden rounded-xl mb-4"><img src="https://images.unsplash.com/photo-1600454021970-351feb4a506e?q=80&w=1000&auto=format&fit=crop" class="w-full h-40 object-cover group-hover:scale-110 transition-transform"></div>
+                    <h4 class="font-bold">Banh Mi</h4><p class="text-xs text-slate-500 mt-1 italic">Combined French & VN flavors</p>
                 </div>
                 <!-- Goi Cuon -->
-                <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
-                    <img src="image_e4bbaf.jpg" alt="Goi Cuon" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2">Goi Cuon</h3>
-                        <p class="text-sm text-slate-600">Fresh spring rolls with delicious dipping sauce.</p>
+                <div class="card group">
+                    <div class="overflow-hidden rounded-xl mb-4"><img src="https://images.unsplash.com/photo-1534422298391-e4f8c170db06?q=80&w=1000&auto=format&fit=crop" class="w-full h-40 object-cover group-hover:scale-110 transition-transform"></div>
+                    <h4 class="font-bold">Goi Cuon</h4><p class="text-xs text-slate-500 mt-1 italic">Fresh spring rolls</p>
+                </div>
+                <!-- Ca Phe Sua Da -->
+                <div class="card group">
+                    <div class="overflow-hidden rounded-xl mb-4"><img src="https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?q=80&w=1000&auto=format&fit=crop" class="w-full h-40 object-cover group-hover:scale-110 transition-transform"></div>
+                    <h4 class="font-bold">Ca Phe Sua Da</h4><p class="text-xs text-slate-500 mt-1 italic">Famous iced coffee</p>
+                </div>
+            </div>
+            <p class="mt-6 text-sm italic text-slate-400 text-center">Also try: Bun Bo Hue, Com Tam, Banh Xeo, Banh Cuon, Banh Khot, and Oc (Sea Snails).</p>
+        </section>
+
+        <!-- Section 7: Dining Recommendations -->
+        <section id="dining" class="pb-20">
+            <h2 class="section-title"><i class="fa-solid fa-utensils text-indigo-500"></i> Dining Recommendations</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Group 1 -->
+                <div class="space-y-4">
+                    <h3 class="font-bold text-indigo-600 border-b-2 border-indigo-100 pb-1">Vietnamese & Asian</h3>
+                    <div class="card text-sm p-4">
+                        <div class="font-bold">Bep Vo</div><p class="text-xs opacity-75 italic mb-1">Cosy Vietnamese</p>
+                        <a href="https://www.google.com/maps/search/Bep+Vo+Thao+Dien" target="_blank" class="map-link">Open Maps <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a>
+                    </div>
+                    <div class="card text-sm p-4">
+                        <div class="font-bold">Quan Bui Garden</div><p class="text-xs opacity-75 italic mb-1">Outdoor garden setting</p>
+                        <a href="https://www.google.com/maps/search/Quan+Bui+Garden+Thao+Dien" target="_blank" class="map-link">Open Maps <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a>
+                    </div>
+                    <div class="card text-sm p-4">
+                        <div class="font-bold">Hue Corner</div><p class="text-xs opacity-75 italic mb-1">Central VN cuisine</p>
+                        <a href="https://www.google.com/maps/search/Hue+Corner+Thao+Dien" target="_blank" class="map-link">Open Maps <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a>
+                    </div>
+                </div>
+                <!-- Group 2 -->
+                <div class="space-y-4">
+                    <h3 class="font-bold text-indigo-600 border-b-2 border-indigo-100 pb-1">Western & International</h3>
+                    <div class="card text-sm p-4">
+                        <div class="font-bold">The Loop</div><p class="text-xs opacity-75 italic mb-1">Burgers & Pizzas</p>
+                        <a href="https://www.google.com/maps/search/The+Loop+Thao+Dien" target="_blank" class="map-link">Open Maps <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a>
+                    </div>
+                    <div class="card text-sm p-4">
+                        <div class="font-bold">Union Jack's</div><p class="text-xs opacity-75 italic mb-1">British Fish & Chips</p>
+                        <a href="https://www.google.com/maps/search/Union+Jacks+Thao+Dien" target="_blank" class="map-link">Open Maps <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a>
+                    </div>
+                    <div class="card text-sm p-4">
+                        <div class="font-bold">Eddie's NY Diner</div><p class="text-xs opacity-75 italic mb-1">Western favorites</p>
+                        <a href="https://www.google.com/maps/search/Eddies+NY+Diner+Thao+Dien" target="_blank" class="map-link">Open Maps <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a>
+                    </div>
+                </div>
+                <!-- Group 3 -->
+                <div class="space-y-4">
+                    <h3 class="font-bold text-indigo-600 border-b-2 border-indigo-100 pb-1">Cafe & Drinks</h3>
+                    <div class="card text-sm p-4">
+                        <div class="font-bold">Snap Cafe</div><p class="text-xs opacity-75 italic mb-1">Family friendly garden</p>
+                        <a href="https://www.google.com/maps/search/Snap+Cafe+Thao+Dien" target="_blank" class="map-link">Open Maps <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a>
+                    </div>
+                    <div class="card text-sm p-4">
+                        <div class="font-bold">BiaCraft Xuan Thuy</div><p class="text-xs opacity-75 italic mb-1">Craft beers & food</p>
+                        <a href="https://www.google.com/maps/search/BiaCraft+Xuan+Thuy" target="_blank" class="map-link">Open Maps <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a>
+                    </div>
+                    <div class="card text-sm p-4">
+                        <div class="font-bold">The Vintage Emporium</div><p class="text-xs opacity-75 italic mb-1">Cosy comfort food</p>
+                        <a href="https://www.google.com/maps/search/Vintage+Emporium+Thao+Dien" target="_blank" class="map-link">Open Maps <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Dining Out (Restaurants) -->
-        <section id="dining" class="mb-20">
-            <h2 class="text-3xl font-bold mb-8 text-indigo-600">Dining Out Near Thao Dien</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Restaurant Item -->
-                <div class="p-4 bg-white rounded-xl border border-slate-100 card-hover">
-                    <h4 class="font-bold">Bep Vo</h4>
-                    <p class="text-xs text-slate-500 italic">Casual Vietnamese food</p>
-                    <a href="https://www.google.com/maps/search/Bep+Vo+Thao+Dien" target="_blank" class="map-btn"><i class="fa-solid fa-location-dot mr-1"></i> Google Maps</a>
-                </div>
-                <div class="p-4 bg-white rounded-xl border border-slate-100 card-hover">
-                    <h4 class="font-bold">The Loop</h4>
-                    <p class="text-xs text-slate-500 italic">Italian-inspired comfort food</p>
-                    <a href="https://www.google.com/maps/search/The+Loop+Thao+Dien" target="_blank" class="map-btn"><i class="fa-solid fa-location-dot mr-1"></i> Google Maps</a>
-                </div>
-                <div class="p-4 bg-white rounded-xl border border-slate-100 card-hover">
-                    <h4 class="font-bold">Union Jack's</h4>
-                    <p class="text-xs text-slate-500 italic">Classic British Fish & Chips</p>
-                    <a href="https://www.google.com/maps/search/Union+Jacks+Fish+and+Chips+Thao+Dien" target="_blank" class="map-btn"><i class="fa-solid fa-location-dot mr-1"></i> Google Maps</a>
-                </div>
-                <div class="p-4 bg-white rounded-xl border border-slate-100 card-hover">
-                    <h4 class="font-bold">Poke Saigon</h4>
-                    <p class="text-xs text-slate-500 italic">Healthy & fresh poke bowls</p>
-                    <a href="https://www.google.com/maps/search/Poke+Saigon+Thao+Dien" target="_blank" class="map-btn"><i class="fa-solid fa-location-dot mr-1"></i> Google Maps</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Areas to Live -->
-        <section id="living" class="mb-20">
-            <h2 class="text-3xl font-bold mb-10 text-center">Popular Areas</h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="p-6 bg-white rounded-3xl border-t-4 border-indigo-500 shadow-sm">
-                    <h3 class="font-bold text-lg mb-2">District 1</h3>
-                    <p class="text-sm text-slate-600">The vibrant heartbeat of HCMC. Dynamic fusion of old and new.</p>
-                </div>
-                <div class="p-6 bg-white rounded-3xl border-t-4 border-green-500 shadow-sm">
-                    <h3 class="font-bold text-lg mb-2">Thao Dien (D2)</h3>
-                    <p class="text-sm text-slate-600">HCMC's expatriate bubble! Quiet, upscale, and trendy boutiques.</p>
-                </div>
-                <div class="p-6 bg-white rounded-3xl border-t-4 border-orange-500 shadow-sm">
-                    <h3 class="font-bold text-lg mb-2">Da Kao</h3>
-                    <p class="text-sm text-slate-600">Quiter, greener residential extension of the city centre.</p>
-                </div>
-            </div>
+            <p class="mt-8 text-sm italic text-slate-500 font-semibold text-center border-2 border-indigo-100 p-4 rounded-xl">
+                Need more? Check: Mekong Merchant, Saigon Bagel, Poke Saigon, Flying Pig, Pendolasco, High Tide, and Pho Ong Tay.
+            </p>
         </section>
 
     </main>
 
-    <footer class="bg-slate-900 text-slate-400 py-12 text-center">
-        <p class="mb-2">© 2026 International Tutor Group - Ho Chi Minh City</p>
-        <div class="flex justify-center space-x-4 text-xs uppercase tracking-widest">
-            <span>Gemma & Will</span>
-            <span>•</span>
-            <span>New Tutor Guide</span>
+    <footer class="bg-white border-t border-slate-200 py-12 px-6 text-center text-slate-500">
+        <div class="max-w-4xl mx-auto space-y-4">
+            <p class="font-bold text-slate-900 uppercase">International Tutor Group | HCMC</p>
+            <p class="text-sm">"This leaflet isn't just about the nuts and bolts of living in HCMC. It’s also filled with tips, advice, and insights from those who have walked the path before you."</p>
+            <div class="pt-4 flex justify-center gap-6 text-indigo-400">
+                <i class="fa-brands fa-facebook text-xl hover:text-indigo-600"></i>
+                <i class="fa-brands fa-instagram text-xl hover:text-indigo-600"></i>
+                <i class="fa-solid fa-envelope text-xl hover:text-indigo-600"></i>
+            </div>
         </div>
     </footer>
 
