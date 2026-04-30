@@ -1,271 +1,179 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to ITG | Your Vietnam Journey Starts Here</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
+    <title>New Tutor Guide - HCMC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <style>
-        :root {
-            --primary: #0056b3; /* Xanh chuyên nghiệp nhưng sáng hơn */
-            --accent: #FF6B6B; /* Đỏ san hô năng động */
-            --yellow: #FFD93D;
-            --light-bg: #F8F9FA;
-            --dark-text: #1A1A1A;
-            --glass: rgba(255, 255, 255, 0.8);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: var(--dark-text);
-            background-color: #fff;
-            overflow-x: hidden;
-        }
-
-        /* --- Header --- */
-        header {
-            position: fixed;
-            width: 100%;
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); text-decoration: none; }
-        .nav-links a { margin-left: 25px; text-decoration: none; color: var(--dark-text); font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
-        .nav-links a:hover { color: var(--accent); }
-
-        /* --- Hero Section --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 0 5%;
-            background: radial-gradient(circle at top right, #eef2f3, #ffffff);
-            position: relative;
-        }
-
-        .hero-content h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
-        .hero-content h1 span { color: var(--primary); }
-        .hero-content p { font-size: 1.2rem; color: #666; max-width: 700px; margin: 0 auto 30px; }
-        
-        .cta-btn {
-            padding: 18px 40px;
-            background: var(--dark-text);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: 0.3s;
-            display: inline-block;
-        }
-        .cta-btn:hover { background: var(--accent); transform: scale(1.05); }
-
-        /* --- Welcome Guide (New Section) --- */
-        .section { padding: 100px 8%; }
-        .section-tag { color: var(--accent); font-weight: 800; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 15px; display: block; }
-        .section-title { font-size: 2.5rem; margin-bottom: 50px; font-weight: 800; }
-
-        .guide-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-        .guide-item { 
-            padding: 40px; border-radius: 24px; background: var(--light-bg); transition: 0.3s;
-            border: 1px solid transparent;
-        }
-        .guide-item:hover { background: white; border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
-        .guide-item i { font-size: 2rem; margin-bottom: 20px; color: var(--accent); }
-
-        /* --- About Section --- */
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-        .about-img { width: 100%; border-radius: 30px; filter: grayscale(20%); }
-
-        /* --- Services/Curriculum Section --- */
-        .services { background: var(--dark-text); color: white; }
-        .service-card { 
-            background: rgba(255,255,255,0.05); padding: 40px; border-radius: 20px;
-            transition: 0.3s;
-        }
-        .service-card:hover { background: var(--primary); }
-
-        /* --- Team Section (Meet the Minds) --- */
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
-        .team-card { text-align: center; }
-        .team-card img { 
-            width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 20px; 
-            margin-bottom: 20px; transition: 0.5s;
-        }
-        .team-card:hover img { border-radius: 50%; transform: rotate(3deg); }
-
-        /* --- Contact Section --- */
-        .contact-box { 
-            background: var(--yellow); padding: 60px; border-radius: 40px; text-align: center;
-        }
-
-        /* --- Marquee --- */
-        .marquee { background: var(--accent); color: white; padding: 15px 0; overflow: hidden; white-space: nowrap; }
-        .marquee div { display: inline-block; animation: scroll 25s linear infinite; font-weight: 800; font-size: 1.2rem; }
-        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-        @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.5rem; }
-            .about-grid { grid-template-columns: 1fr; }
-            .section { padding: 60px 5%; }
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .section-card { @apply bg-white p-8 rounded-xl shadow-sm mb-8 border border-gray-100; }
+        .nav-link { @apply hover:text-blue-600 transition-colors duration-200 font-medium; }
     </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800">
 
-    <header>
-        <a href="#" class="logo">ITG<span>.</span></a>
-        <nav class="nav-links">
-            <a href="#about">About</a>
-            <a href="#guide">Survival Kit</a>
-            <a href="#services">Curriculum</a>
-            <a href="#team">Team</a>
-            <a href="#contact">Contact</a>
-        </nav>
+    <nav class="sticky top-0 bg-white/90 backdrop-blur-md shadow-md z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <span class="text-xl font-bold text-blue-700">ITG HCMC GUIDE</span>
+            <div class="hidden md:flex space-x-6 text-sm uppercase tracking-wide">
+                <a href="#welcome" class="nav-link">Welcome</a>
+                <a href="#packing" class="nav-link">Packing</a>
+                <a href="#arrival" class="nav-link">Arrival</a>
+                <a href="#transport" class="nav-link">Transport</a>
+                <a href="#living" class="nav-link">Living</a>
+                <a href="#food" class="nav-link">Food</a>
+            </div>
+        </div>
+    </nav>
+
+    <header id="welcome" class="relative h-[60vh] flex items-center justify-center text-white overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&q=80&w=2070" class="absolute inset-0 w-full h-full object-cover brightness-50" alt="HCMC Skyline">
+        <div class="relative text-center px-4">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">Chào mừng đến với TP. Hồ Chí Minh!</h1>
+            <p class="text-xl md:text-2xl font-light">International Tutor Group - New Tutor Guide</p>
+        </div>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <span class="section-tag">Xin Chào! Welcome to Saigon</span>
-            <h1>Everything is <span>Better</span><br>When You're Here.</h1>
-            <p>Your official guide to settling in, working at ITG, and falling in love with the vibrant life of Vietnam.</p>
-            <a href="#guide" class="cta-btn">Unlock Your Welcome Kit</a>
-        </div>
-    </section>
+    <main class="max-w-5xl mx-auto px-4 py-12">
 
-    <div class="marquee">
-        <div>
-            SAIGON VIBES • IB & IGCSE EXPERTS • COFFEE & CHAOS • WORK WITH PASSION • BEST TUTORS IN TOWN • XIN CHÀO • SAIGON VIBES • IB & IGCSE EXPERTS • COFFEE & CHAOS • WORK WITH PASSION • BEST TUTORS IN TOWN • 
-        </div>
-    </div>
+        <section class="section-card">
+            <h2 class="text-3xl font-bold text-blue-800 mb-6 border-b-2 border-blue-100 pb-2">Welcome to the Team</h2>
+            <p class="mb-4 leading-relaxed">Di chuyển đến một thành phố sôi động như TP.HCM có thể gây choáng ngợp. Cẩm nang này được biên soạn bởi các gia sư đi trước (Gemma & Will) để giúp bạn ổn định cuộc sống tại ngôi nhà mới.</p>
+            <div class="bg-blue-50 p-4 rounded-lg italic">
+                "Chúc may mắn! (Good luck!)" - Gemma & Will
+            </div>
+        </section>
 
-    <!-- About Section -->
-    <section class="section" id="about">
-        <div class="about-grid">
-            <div>
-                <span class="section-tag">Who we are</span>
-                <h2 class="section-title">More than just a tutoring center.</h2>
-                <p>ITG is a boutique educational hub specializing in international curricula. We don't just teach; we mentor. For our new team members, we are your first family in Vietnam.</p>
-                <br>
-                <p>Located in the heart of the city, we provide a premium learning environment for IB and IGCSE students.</p>
+        <section id="packing" class="section-card">
+            <h2 class="text-3xl font-bold text-blue-800 mb-6 border-b-2 border-blue-100 pb-2">What to Pack? (Chuẩn bị hành lý)</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-3 text-orange-600"><i class="fa-solid fa-passport mr-2"></i>Hồ sơ & Sức khỏe</h3>
+                    <ul class="list-disc ml-5 space-y-2">
+                        <li><strong>Hộ chiếu:</strong> Còn hạn trên 6 tháng.</li>
+                        <li><strong>Bảo hiểm:</strong> ITG cung cấp bảo hiểm khi bạn đến, nhưng hãy mua bảo hiểm du lịch cho chuyến đi đầu tiên.</li>
+                        <li><strong>Y tế:</strong> Mang theo thuốc kê đơn đủ dùng trong 3 tháng.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-3 text-orange-600"><i class="fa-solid fa-suitcase-rolling mr-2"></i>Vật dụng khó tìm</h3>
+                    <ul class="list-disc ml-5 space-y-2 text-sm">
+                        <li><strong>Kính áp tròng:</strong> Có thể mua tại VN nhưng đắt hơn.</li>
+                        <li><strong>Đồ vệ sinh phụ nữ:</strong> Tampon khó tìm hơn băng vệ sinh.</li>
+                        <li><strong>Giày size lớn:</strong> Nam trên size 10 (44), Nữ trên size 5 (38) nên mang thêm 1-2 đôi dự phòng.</li>
+                        <li><strong>Kem chống nắng:</strong> Nhiều loại tại VN có chứa chất làm trắng, nên mang thương hiệu quen thuộc.</li>
+                        <li><strong>Trà:</strong> Nếu bạn nghiện trà Anh (Yorkshire/PG Tips), hãy mang theo!</li>
+                    </ul>
+                </div>
             </div>
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800" class="about-img" alt="ITG Workspace">
-        </div>
-    </section>
+        </section>
 
-    <!-- Survival Kit Section (Cái mới bạn cần) -->
-    <section class="section" id="guide" style="background: #fff;">
-        <span class="section-tag">First time in VN?</span>
-        <h2 class="section-title">The Newbie Survival Kit</h2>
-        <div class="guide-container">
-            <div class="guide-item">
-                <i class="fas fa-motorcycle"></i>
-                <h3>Ride like a Local</h3>
-                <p>Download <b>Grab</b> or <b>Be</b> immediately. It's the "Uber" of Vietnam. Start with GrabCar if bikes look scary!</p>
+        <section id="arrival" class="section-card">
+            <h2 class="text-3xl font-bold text-blue-800 mb-6 border-b-2 border-blue-100 pb-2">Arrival at Tan Son Nhat (Đến nơi)</h2>
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="md:w-2/3">
+                    <p class="mb-4 font-semibold text-red-600">Lưu ý: Ghé quầy Visa trước khi làm thủ tục nhập cảnh!</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-2"></i><span>Sau khi lấy hành lý, ITG sẽ sắp xếp xe đón bạn về chỗ ở.</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-2"></i><span>Chúng tôi sẽ chuẩn bị sẵn SIM điện thoại và các vật dụng thiết yếu cho ngày đầu.</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-1 mr-2"></i><span>Chỗ ở của bạn sẽ gần trung tâm dạy học.</span></li>
+                    </ul>
+                </div>
+                <div class="md:w-1/3 bg-gray-100 p-4 rounded text-sm italic">
+                    [Bản đồ sân bay: Quầy Visa nằm bên trái các bốt kiểm soát hộ chiếu]
+                </div>
             </div>
-            <div class="guide-item">
-                <i class="fas fa-mug-hot"></i>
-                <h3>Caffeine Fix</h3>
-                <p>Try <i>Cà Phê Muối</i> (Salt Coffee) - it's the trend of 2026. Careful, it's addictive!</p>
-            </div>
-            <div class="guide-item">
-                <i class="fas fa-wallet"></i>
-                <h3>Money Talk</h3>
-                <p>Count the zeros! 500,000 VND is about $20. Always check your change twice.</p>
-            </div>
-            <div class="guide-item">
-                <i class="fas fa-heart"></i>
-                <h3>Em Ơi!</h3>
-                <p>The magic phrase to call for service anywhere. It literally means "Hey, younger sibling!"</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Services Section -->
-    <section class="section services" id="services">
-        <span class="section-tag" style="color: var(--yellow);">What we do</span>
-        <h2 class="section-title" style="color: white;">Academic Excellence</h2>
-        <div class="guide-container">
-            <div class="service-card">
-                <h3>IB Diploma</h3>
-                <p>Comprehensive support for Internal Assessments and Final Exams.</p>
+        <section id="transport" class="section-card">
+            <h2 class="text-3xl font-bold text-blue-800 mb-6 border-b-2 border-blue-100 pb-2">Getting Around (Di chuyển)</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="border-l-4 border-green-500 pl-4">
+                    <h3 class="font-bold mb-2 uppercase tracking-wide">Taxis & Apps</h3>
+                    <p class="text-sm mb-3">Sử dụng các ứng dụng phổ biến: <strong>Grab, GoJek & Be</strong>.</p>
+                    <p class="text-sm">Hãng taxi uy tín: <strong>Vinasun, Mai Linh</strong>.</p>
+                    <p class="mt-2 text-xs text-gray-500 italic">Giá tham khảo: 30,000 VND (đi gần) - 150,000 VND (Thảo Điền đến Q1).</p>
+                </div>
+                <div class="border-l-4 border-blue-500 pl-4">
+                    <h3 class="font-bold mb-2 uppercase tracking-wide">Motorbike (Xe máy)</h3>
+                    <p class="text-sm">Bạn cần bằng lái để đảm bảo bảo hiểm có hiệu lực. Có thể đổi bằng lái UK sang bằng Việt Nam.</p>
+                    <p class="text-sm mt-2 font-bold">Hãy luôn đội mũ bảo hiểm chuẩn EU!</p>
+                </div>
             </div>
-            <div class="service-card">
-                <h3>IGCSE</h3>
-                <p>Building strong foundations for younger international students.</p>
-            </div>
-            <div class="service-card">
-                <h3>A-Levels</h3>
-                <p>Specialized tutoring for advanced subject mastery.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Team Section -->
-    <section class="section" id="team">
-        <span class="section-tag">The ITG Family</span>
-        <h2 class="section-title">Meet the Minds</h2>
-        <div class="team-grid">
-            <div class="team-card">
-                <img src="https://via.placeholder.com/400" alt="Team 1">
-                <h3>Jordy</h3>
-                <p>Founder & Mentor</p>
+        <section id="living" class="section-card">
+            <h2 class="text-3xl font-bold text-blue-800 mb-6 border-b-2 border-blue-100 pb-2">Where to Live? (Khu vực sinh sống)</h2>
+            <div class="space-y-4">
+                <div class="p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
+                    <h4 class="font-bold text-blue-600">District 1 (Quận 1)</h4>
+                    <p class="text-sm">Trái tim của thành phố. Năng động, nhiều nhà hàng, bar và điểm tham quan văn hóa.</p>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
+                    <h4 class="font-bold text-blue-600">District 2 - Thao Dien (Thảo Điền)</h4>
+                    <p class="text-sm">"Ốc đảo" của người nước ngoài. Nhiều biệt thự, trường quốc tế và quán cafe sang trọng ven sông.</p>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors">
+                    <h4 class="font-bold text-blue-600">District 7 - Phu My Hung (Phú Mỹ Hưng)</h4>
+                    <p class="text-sm">Yên tĩnh, quy hoạch hiện đại, nhiều không gian xanh, rất phổ biến với cộng đồng expat.</p>
+                </div>
             </div>
-            <div class="team-card">
-                <img src="https://via.placeholder.com/400" alt="Team 2">
-                <h3>Will</h3>
-                <p>Academic Lead</p>
+            
+            <div class="mt-8 p-6 bg-yellow-50 rounded-xl border border-yellow-200">
+                <h3 class="font-bold mb-3"><i class="fa-solid fa-file-contract mr-2"></i>Rental Rules (Lưu ý thuê nhà)</h3>
+                <ul class="grid md:grid-cols-2 gap-4 text-sm">
+                    <li>• Tiền đặt cọc thường là 2 tháng tiền thuê.</li>
+                    <li>• Luôn yêu cầu hợp đồng song ngữ (Việt - Anh).</li>
+                    <li>• Bạn phải đăng ký tạm trú với công an địa phương (chủ nhà thường sẽ hỗ trợ).</li>
+                    <li>• Tiền điện nước thường thanh toán riêng hàng tháng.</li>
+                </ul>
             </div>
-            <div class="team-card">
-                <img src="https://via.placeholder.com/400" alt="Team 3">
-                <h3>Alice</h3>
-                <p>Content Specialist</p>
-            </div>
-            <div class="team-card">
-                <img src="https://via.placeholder.com/400" alt="Team 4">
-                <h3>Calantha</h3>
-                <p>Administrator</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact Section -->
-    <section class="section" id="contact">
-        <div class="contact-box">
-            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Ready to join the vibe?</h2>
-            <p style="margin-bottom: 30px;">We're always looking for passionate educators and creative minds.</p>
-            <a href="mailto:hello@itg.edu.vn" class="cta-btn">Send us a Message</a>
-        </div>
-    </section>
+        <section id="food" class="section-card">
+            <h2 class="text-3xl font-bold text-blue-800 mb-6 border-b-2 border-blue-100 pb-2">Food & Dining (Ẩm thực)</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div>
+                    <h3 class="font-bold mb-3 text-red-700">Must Try Dishes (Phải thử)</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><strong>Phở:</strong> Món nước biểu tượng của Việt Nam.</li>
+                        <li><strong>Bánh Mì:</strong> Sự kết hợp Pháp-Việt tuyệt vời.</li>
+                        <li><strong>Cơm Tấm:</strong> Cơm gạo vỡ với sườn nướng.</li>
+                        <li><strong>Cà Phê Sữa Đá:</strong> Cà phê truyền thống cực mạnh.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-3 text-red-700">Apps & Shopping</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><strong>Giao thức ăn:</strong> GrabFood, ShopeeFood (Now.vn).</li>
+                        <li><strong>Mua sắm online:</strong> Shopee, Lazada, Tiki.</li>
+                        <li><strong>Siêu thị:</strong> Vincom Mega Mall, Annam Gourmet (hàng nhập khẩu), Tops Market.</li>
+                    </ul>
+                </div>
+            </div>
 
-    <footer style="padding: 40px; text-align: center; font-size: 0.8rem; color: #999;">
-        © 2026 International Tutor Group | Made for the Newcomers
+            <div class="bg-gray-800 text-white p-6 rounded-xl">
+                <h3 class="text-center font-bold mb-4">Gợi ý quán ăn gần ITG (Thảo Điền)</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-xs text-center">
+                    <div class="p-2 border border-gray-600 rounded">Bep Vo (Vietnamese)</div>
+                    <div class="p-2 border border-gray-600 rounded">The Loop (Western)</div>
+                    <div class="p-2 border border-gray-600 rounded">Mekong Merchant</div>
+                    <div class="p-2 border border-gray-600 rounded">Union Jack's (Fish & Chips)</div>
+                    <div class="p-2 border border-gray-600 rounded">Pendolasco (Italian)</div>
+                    <div class="p-2 border border-gray-600 rounded">Eddie's New York Diner</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 py-8 text-center text-gray-500 text-sm">
+        <p>&copy; 2026 International Tutor Group - Ho Chi Minh City</p>
+        <p class="mt-2">Welcome to your new home!</p>
     </footer>
 
-    <script>
-        // Hiệu ứng cuộn mượt (Smooth Scroll)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
 </body>
 </html>
